@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Navigation from '../components/Navigation.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ExperienceSection from '../components/ExperienceSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import CvSection from '../components/CvSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { getTranslations } from '../i18n/i18n';
+
+const t = getTranslations(Astro.url);
+---
+
+<Base title="Diego Betancourt - Software Engineer" description={t.meta.description}>
+  <Navigation />
+
+  <main class="md:ml-64 pt-16 md:pt-0">
+    <AboutSection title={t.about.title} />
+    <ExperienceSection title={t.experience.title} presentLabel={t.experience.present} />
+    <ProjectsSection title={t.projects.title} demoLabel={t.projects.demo} repoLabel={t.projects.repo} />
+    <CvSection title={t.cv.title} downloadLabel={t.cv.download} />
+    <ContactSection title={t.contact.title} linkedinLabel={t.contact.linkedin} githubLabel={t.contact.github} />
+  </main>
+</Base>

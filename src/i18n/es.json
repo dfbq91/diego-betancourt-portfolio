@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "about": "Acerca de Mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "cv": "Hoja de Vida",
+    "contact": "Contacto",
+    "blog": "Blog"
+  },
+  "about": {
+    "title": "Acerca de Mí",
+    "location": "Ubicación"
+  },
+  "experience": {
+    "title": "Experiencia",
+    "present": "Presente"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "demo": "Demo",
+    "repo": "Repositorio"
+  },
+  "cv": {
+    "title": "Hoja de Vida",
+    "download": "Descargar CV"
+  },
+  "contact": {
+    "title": "Contacto",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "blog": {
+    "title": "Blog",
+    "noArticles": "No hay artículos disponibles"
+  },
+  "meta": {
+    "description": "Portafolio de Diego Betancourt - Software Engineer"
+  }
+}

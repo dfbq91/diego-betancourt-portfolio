@@ -1,0 +1,23 @@
+[
+  {
+    "name": "TaskMaster Pro",
+    "description": "Aplicación de gestión de tareas en tiempo real con colaboración en equipo, notificaciones push y sincronización offline.",
+    "technologies": ["React", "Node.js", "PostgreSQL", "WebSocket"],
+    "demoUrl": "https://taskmaster-demo.vercel.app",
+    "repoUrl": "https://github.com/diegobetancourt/taskmaster"
+  },
+  {
+    "name": "WeatherDash",
+    "description": "Dashboard meteorológico con visualizaciones interactivas, alertas personalizadas y datos históricos de más de 10 años.",
+    "technologies": ["Vue.js", "D3.js", "Python", "FastAPI"],
+    "demoUrl": null,
+    "repoUrl": "https://github.com/diegobetancourt/weatherdash"
+  },
+  {
+    "name": "DevPortfolio",
+    "description": "Generador de portafolios para desarrolladores con múltiples templates, integración con GitHub y hosting estático.",
+    "technologies": ["Astro", "TypeScript", "Tailwind CSS"],
+    "demoUrl": "https://devportfolio.dev",
+    "repoUrl": null
+  }
+]

@@ -3,7 +3,9 @@ dist/
 # generated types
 .astro/
 
-.comandcode/
+.commandcode/
+
+CLAUDE.md
 
 # dependencies
 node_modules/

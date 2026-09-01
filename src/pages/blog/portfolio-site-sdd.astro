@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navigation from '../../components/Navigation.astro';
+import { getLocale, getTranslations } from '../../i18n/i18n';
+import sddPost from '../../data/blog/portfolio-site-sdd.json';
+
+const locale = getLocale(Astro.url);
+const t = getTranslations(Astro.url);
+
+const title = locale === 'en' ? sddPost.titleEn : sddPost.titleEs;
+const content = locale === 'en' ? sddPost.contentEn : sddPost.contentEs;
+const excerpt = locale === 'en' 
+  ? 'A practical walkthrough of building this site using Spec Driven Development'
+  : 'Un recorrido práctico por el proceso de construir este site usando Spec Driven Development';
+
+function formatDate(dateStr: string, loc: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString(loc === 'en' ? 'en-US' : 'es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<Base title={`${title} - Diego Betancourt`} description={excerpt}>
+  <Navigation />
+
+  <main class="md:ml-64 pt-16 md:pt-0 min-h-screen">
+    <article class="py-16 px-4 md:px-8 max-w-3xl">
+      <header class="mb-8 pb-8 border-b border-gray-200">
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+          {title}
+        </h1>
+        <div class="flex items-center gap-4 text-sm text-gray-500">
+          <span>{sddPost.id === 'portfolio-site-sdd' ? 'Diego Betancourt' : sddPost.id}</span>
+          <span>•</span>
+          <time>{formatDate(sddPost.date, locale)}</time>
+        </div>
+      </header>
+
+      <div class="prose max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-blue-600 prose-strong:text-gray-900" set:html={content.replace(/\n/g, '<br>')} />
+
+      <footer class="mt-12 pt-8 border-t border-gray-200">
+        <a
+          href={`/blog?lang=${locale}`}
+          class="text-blue-600 hover:text-blue-800 flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          {locale === 'en' ? 'Back to Blog' : 'Volver al Blog'}
+        </a>
+      </footer>
+    </article>
+  </main>
+</Base>

@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "about": "About Me",
+    "experience": "Experience",
+    "projects": "Projects",
+    "cv": "Resume",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+  "about": {
+    "title": "About Me",
+    "location": "Location"
+  },
+  "experience": {
+    "title": "Experience",
+    "present": "Present"
+  },
+  "projects": {
+    "title": "Projects",
+    "demo": "Demo",
+    "repo": "Repository"
+  },
+  "cv": {
+    "title": "Resume",
+    "download": "Download Resume"
+  },
+  "contact": {
+    "title": "Contact",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "blog": {
+    "title": "Blog",
+    "noArticles": "No articles available"
+  },
+  "meta": {
+    "description": "Diego Betancourt Portfolio - Software Engineer"
+  }
+}

@@ -1,0 +1,63 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Navigation from '../../components/Navigation.astro';
+import { getLocale, getTranslations } from '../../i18n/i18n';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  return allPosts.map((post) => ({
+    params: { post: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = getTranslations(Astro.url);
+
+const { Content } = await render(post);
+
+function formatDate(date: Date, locale: string): string {
+  return date.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<Base title={`${post.data.title} - Diego Betancourt`} description={post.data.excerpt}>
+  <Navigation />
+
+  <main class="md:ml-64 pt-16 md:pt-0 min-h-screen">
+    <article class="py-16 px-4 md:px-8 max-w-3xl">
+      <header class="mb-8 pb-8 border-b border-gray-200">
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+          {post.data.title}
+        </h1>
+        <div class="flex items-center gap-4 text-sm text-gray-500">
+          <span>{post.data.author}</span>
+          <span>•</span>
+          <time>{formatDate(post.data.date, locale)}</time>
+        </div>
+      </header>
+
+      <div class="prose max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-blue-600 prose-strong:text-gray-900">
+        <Content />
+      </div>
+
+      <footer class="mt-12 pt-8 border-t border-gray-200">
+        <a
+          href={`/blog?lang=${locale}`}
+          class="text-blue-600 hover:text-blue-800 flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          <span data-i18n="backToBlog">{locale === 'en' ? 'Back to Blog' : 'Volver al Blog'}</span>
+        </a>
+      </footer>
+    </article>
+  </main>
+</Base>

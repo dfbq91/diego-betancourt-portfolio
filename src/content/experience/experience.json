@@ -1,0 +1,23 @@
+[
+  {
+    "company": "Tech Solutions SAS",
+    "position": "Senior Software Engineer",
+    "startDate": "2022-03",
+    "endDate": null,
+    "description": "- Lideré el desarrollo de una plataforma de comercio electrónico que aumentó las ventas en un 40%\n- Implementé arquitectura de microservicios reduciendo tiempos de carga en un 60%\n- Mentoré a 3 desarrolladores junior, mejorando la calidad del código del equipo"
+  },
+  {
+    "company": "Digital Innovation Labs",
+    "position": "Full Stack Developer",
+    "startDate": "2020-01",
+    "endDate": "2022-02",
+    "description": "- Desarrollé aplicaciones web responsivas usando React y Node.js\n- Optimicé consultas de base de datos reduciendo tiempos de respuesta en un 75%\n- Implementé pipeline de CI/CD reduciendo tiempo de despliegue de horas a minutos"
+  },
+  {
+    "company": "StartupHub",
+    "position": "Junior Developer",
+    "startDate": "2019-06",
+    "endDate": "2019-12",
+    "description": "- Participé en el desarrollo de MVP para múltiples startups\n- Creé APIs RESTful documentadas con Swagger\n- Colaboré en equipos ágiles siguiendo metodologías Scrum"
+  }
+]

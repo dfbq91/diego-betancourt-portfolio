@@ -1,0 +1,66 @@
+---
+import { getLocale } from '../i18n/i18n';
+import experienceEs from '../content/experience/experience.json';
+import experienceEn from '../content/experience/experience.en.json';
+
+interface Experience {
+  company: string;
+  position: string;
+  startDate: string;
+  endDate: string | null;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  presentLabel: string;
+}
+
+const { title, presentLabel } = Astro.props;
+const locale = getLocale(Astro.url);
+const experiences: Experience[] = (locale === 'en' ? experienceEn : experienceEs).sort(
+  (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+);
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-CO', {
+    month: 'short',
+    year: 'numeric',
+  });
+}
+
+function renderDescription(description: string): string[] {
+  return description.split('\n').filter(line => line.trim().startsWith('-'));
+}
+---
+
+<section id="experience" class="py-16 px-4 md:px-8 scroll-mt-16">
+  <h2 data-i18n="experience" class="text-2xl font-bold text-gray-900 mb-8 pb-2 border-b border-gray-200">
+    {title}
+  </h2>
+  <div class="space-y-8">
+    {experiences.map((exp) => (
+      <div class="relative pl-6 border-l-2 border-gray-200">
+        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
+        <div class="space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+            <h3 class="text-lg font-semibold text-gray-900">{exp.position}</h3>
+            <span class="text-sm text-gray-500">
+              {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : presentLabel}
+            </span>
+          </div>
+          <p class="text-blue-600 font-medium">{exp.company}</p>
+          <ul class="space-y-1 text-gray-600 text-sm">
+            {renderDescription(exp.description).map((item) => (
+              <li class="flex items-start gap-2">
+                <span class="text-gray-400 mt-1.5">•</span>
+                <span>{item.replace(/^-\s*/, '')}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
