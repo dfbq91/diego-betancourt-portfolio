@@ -128,7 +128,7 @@
 
 - [x] **T-28: Run final build and verify** ✅
   - RFs: Todos
-  - Hecho cuando: `npm run build` genera sitio estático sin errores
+  - Hecho cuando: `npm run build` genera web sin errores
 
 - [x] **T-29: Run all Playwright tests and fix failures** ✅
   - RFs: Todos

@@ -20,6 +20,18 @@
     "demo": "Demo",
     "repo": "Repository"
   },
+  "chat": {
+    "title": "Chat with Diego",
+    "eyebrow": "A direct conversation",
+    "intro": "Ask about Diego's experience, projects, or approach to building software.",
+    "welcome": "Hi, I’m Diego’s assistant. What would you like to know?",
+    "inputLabel": "Your question for Diego",
+    "placeholder": "Write your question…",
+    "send": "Send",
+    "typing": "Diego is typing…",
+    "error": "We couldn’t get a response. Please try again.",
+    "limit": "You’ve reached the question limit for this session."
+  },
   "cv": {
     "title": "Resume",
     "download": "Download Resume"

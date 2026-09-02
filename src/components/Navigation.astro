@@ -5,7 +5,7 @@ import LanguageSelector from './LanguageSelector.astro';
 const locale = getLocale(Astro.url);
 const t = getTranslations(Astro.url);
 
-const navItems = ['about', 'experience', 'projects', 'cv', 'contact'];
+const navItems = ['about', 'experience', 'projects', 'chat', 'cv', 'contact'];
 
 const getNavHref = (id: string) => {
   return `/?lang=${locale}#${id}`;

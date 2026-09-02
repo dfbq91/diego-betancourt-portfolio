@@ -3,6 +3,12 @@ dist/
 # generated types
 .astro/
 
+# generated RAG index (regenerated at build time by scripts/build-rag-index.ts)
+src/data/rag-index.json
+
+# generated Cloudflare worker types
+worker-configuration.d.ts
+
 .commandcode/
 
 CLAUDE.md

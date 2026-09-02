@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation.astro';
 import AboutSection from '../components/AboutSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
 import ProjectsSection from '../components/ProjectsSection.astro';
+import ChatSection from '../components/ChatSection.astro';
 import CvSection from '../components/CvSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { getTranslations } from '../i18n/i18n';
@@ -18,6 +19,18 @@ const t = getTranslations(Astro.url);
     <AboutSection title={t.about.title} />
     <ExperienceSection title={t.experience.title} presentLabel={t.experience.present} />
     <ProjectsSection title={t.projects.title} demoLabel={t.projects.demo} repoLabel={t.projects.repo} />
+    <ChatSection
+      title={t.chat.title}
+      eyebrow={t.chat.eyebrow}
+      intro={t.chat.intro}
+      welcome={t.chat.welcome}
+      inputLabel={t.chat.inputLabel}
+      placeholder={t.chat.placeholder}
+      sendLabel={t.chat.send}
+      typingLabel={t.chat.typing}
+      errorMessage={t.chat.error}
+      limitMessage={t.chat.limit}
+    />
     <CvSection title={t.cv.title} downloadLabel={t.cv.download} />
     <ContactSection title={t.contact.title} linkedinLabel={t.contact.linkedin} githubLabel={t.contact.github} />
   </main>

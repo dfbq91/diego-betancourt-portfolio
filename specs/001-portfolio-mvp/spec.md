@@ -2,9 +2,9 @@
 
 ## Contexto y Objetivo
 
-**Contexto**: Portafolio personal estático para mostrar la trayectoria profesional de Diego Betancourt como Software Engineer. Diseño minimalista con enfoque en contenido y legibilidad.
+**Contexto**: Portafolio personal para mostrar la trayectoria profesional de Diego Betancourt como Software Engineer. Diseño minimalista con enfoque en contenido y legibilidad.
 
-**Objetivo**: Crear una página estática que presente información profesional de manera clara, con navegación fluida entre secciones y soporte bilingüe ES/EN.
+**Objetivo**: Crear una web que presente información profesional de manera clara, con navegación fluida entre secciones y soporte bilingüe ES/EN.
 
 ---
 
@@ -106,8 +106,8 @@ Como visitante, quiero ver el contenido en español o inglés según mi preferen
 ## Requisitos No Funcionales
 
 ### RNF-1: Renderizado
-- La página debe ser 100% estática (SSG de Astro)
 - Sin dependencias de base de datos en runtime
+- Aclaración (extensión Chat RAG, `specs/002-portfolio-IA-deploy/spec.md`): las páginas de contenido son 100% estáticas (prerender); `/api/chat` es la única ruta dinámica del sitio, ejecutada como Cloudflare Function
 
 ### RNF-2: Accesibilidad
 - Navegación por teclado funcional

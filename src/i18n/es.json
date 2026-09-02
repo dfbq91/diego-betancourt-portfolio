@@ -20,6 +20,18 @@
     "demo": "Demo",
     "repo": "Repositorio"
   },
+  "chat": {
+    "title": "Chatea con Diego",
+    "eyebrow": "Conversación directa",
+    "intro": "Pregúntame sobre la experiencia, proyectos o forma de trabajar de Diego.",
+    "welcome": "Hola, soy el asistente de Diego. ¿Qué te gustaría saber?",
+    "inputLabel": "Tu pregunta para Diego",
+    "placeholder": "Escribe tu pregunta…",
+    "send": "Enviar",
+    "typing": "Diego está escribiendo…",
+    "error": "No se pudo obtener una respuesta. Inténtalo de nuevo.",
+    "limit": "Alcanzaste el límite de preguntas para esta sesión."
+  },
   "cv": {
     "title": "Hoja de Vida",
     "download": "Descargar CV"

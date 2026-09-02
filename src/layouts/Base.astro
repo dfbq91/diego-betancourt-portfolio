@@ -21,8 +21,8 @@ const { title, description = 'Software Engineer Portfolio' } = Astro.props;
     <script is:inline>
       const locale = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'es';
       const labels = {
-        es: { about: 'Acerca de Mí', experience: 'Experiencia', projects: 'Proyectos', cv: 'Hoja de Vida', contact: 'Contacto', blog: 'Blog', backToBlog: 'Volver al Blog' },
-        en: { about: 'About Me', experience: 'Experience', projects: 'Projects', cv: 'Resume', contact: 'Contact', blog: 'Blog', backToBlog: 'Back to Blog' },
+        es: { about: 'Acerca de Mí', experience: 'Experiencia', projects: 'Proyectos', chat: 'Chatea con Diego', cv: 'Hoja de Vida', contact: 'Contacto', blog: 'Blog', backToBlog: 'Volver al Blog' },
+        en: { about: 'About Me', experience: 'Experience', projects: 'Projects', chat: 'Chat with Diego', cv: 'Resume', contact: 'Contact', blog: 'Blog', backToBlog: 'Back to Blog' },
       };
 
       document.documentElement.lang = locale;
