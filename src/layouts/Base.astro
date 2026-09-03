@@ -4,7 +4,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Software Engineer Portfolio' } = Astro.props;
+const { title, description = 'Software Engineer Portfolio — Diego Betancourt' } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,10 +13,11 @@ const { title, description = 'Software Engineer Portfolio' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#09090b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body class="bg-white text-gray-900 antialiased">
+  <body>
     <slot />
     <script is:inline>
       const locale = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'es';
@@ -31,49 +32,14 @@ const { title, description = 'Software Engineer Portfolio' } = Astro.props;
         const key = element.getAttribute('data-i18n');
         if (key && labels[locale][key]) element.textContent = labels[locale][key];
       });
-      if (locale === 'en') {
-        document.querySelectorAll('a[href*="lang=es"]:not([data-locale-link])').forEach((link) => {
-          const href = link.getAttribute('href');
-          if (href) link.setAttribute('href', href.replace('lang=es', 'lang=en'));
-        });
-      }
+      document.querySelectorAll('a[href*="lang="]:not([data-locale-link])').forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href) link.setAttribute('href', href.replace(/lang=(es|en)/g, `lang=${locale}`));
+      });
     </script>
   </body>
 </html>
 
 <style is:global>
   @import "../styles/global.css";
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  [data-language-content='en'] {
-    display: none;
-  }
-
-  html[data-locale='en'] [data-language-content='es'] {
-    display: none;
-  }
-
-  html[data-locale='en'] [data-language-content='en'] {
-    display: grid;
-  }
-
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
 </style>

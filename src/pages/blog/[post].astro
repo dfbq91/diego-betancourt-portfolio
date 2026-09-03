@@ -18,8 +18,8 @@ const t = getTranslations(Astro.url);
 
 const { Content } = await render(post);
 
-function formatDate(date: Date, locale: string): string {
-  return date.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-CO', {
+function formatDate(date: Date, loc: string): string {
+  return date.toLocaleDateString(loc === 'en' ? 'en-US' : 'es-CO', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -27,35 +27,81 @@ function formatDate(date: Date, locale: string): string {
 }
 ---
 
-<Base title={`${post.data.title} - Diego Betancourt`} description={post.data.excerpt}>
+<Base title={`${post.data.title} — Diego Betancourt`} description={post.data.excerpt}>
   <Navigation />
 
-  <main class="md:ml-64 pt-16 md:pt-0 min-h-screen">
-    <article class="py-16 px-4 md:px-8 max-w-3xl">
-      <header class="mb-8 pb-8 border-b border-gray-200">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+  <main
+    style="padding-top: 3.5rem;"
+    id="post-main"
+  >
+    <script is:inline>
+      function setPostOffset() {
+        const main = document.getElementById('post-main');
+        if (!main) return;
+        if (window.innerWidth >= 768) {
+          main.style.marginLeft = '15rem';
+          main.style.paddingTop = '0';
+        } else {
+          main.style.marginLeft = '0';
+          main.style.paddingTop = '3.5rem';
+        }
+      }
+      setPostOffset();
+      window.addEventListener('resize', setPostOffset);
+    </script>
+
+    <article
+      style="
+        padding: 4rem 2.5rem 6rem;
+        max-width: calc(15rem + 52rem);
+      "
+    >
+      <!-- Article header -->
+      <header style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border);">
+        <p class="t-metadata" style="color: var(--color-text-muted); margin-bottom: 1rem;">
+          <a
+            href={`/blog?lang=${locale}`}
+            style="color: var(--color-text-muted); text-decoration: none; transition: color 150ms ease-out;"
+          >
+            Blog
+          </a>
+          &nbsp;/&nbsp;
+          <time datetime={post.data.date.toISOString()}>
+            {formatDate(post.data.date, locale)}
+          </time>
+        </p>
+
+        <h1 class="t-h1" style="margin-bottom: 1rem; max-width: 44rem;">
           {post.data.title}
         </h1>
-        <div class="flex items-center gap-4 text-sm text-gray-500">
-          <span>{post.data.author}</span>
-          <span>•</span>
-          <time>{formatDate(post.data.date, locale)}</time>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <span class="t-metadata" style="color: var(--color-text-muted);">{post.data.author}</span>
         </div>
       </header>
 
-      <div class="prose max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-blue-600 prose-strong:text-gray-900">
+      <!-- Article body — editorial prose -->
+      <div class="prose-editorial" style="max-width: 68ch;">
         <Content />
       </div>
 
-      <footer class="mt-12 pt-8 border-t border-gray-200">
+      <!-- Article footer -->
+      <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
         <a
           href={`/blog?lang=${locale}`}
-          class="text-blue-600 hover:text-blue-800 flex items-center gap-2"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--color-text-muted);
+            transition: color 150ms ease-out;
+          "
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          <span data-i18n="backToBlog">{locale === 'en' ? 'Back to Blog' : 'Volver al Blog'}</span>
+          <span class="t-metadata">←</span>
+          <span class="t-label" data-i18n="backToBlog">
+            {locale === 'en' ? 'Back to Blog' : 'Volver al Blog'}
+          </span>
         </a>
       </footer>
     </article>

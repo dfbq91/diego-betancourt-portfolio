@@ -36,5 +36,5 @@ export function t(url: URL, key: string): string {
 export function getAlternateUrl(url: URL, locale: Locale): string {
   const newUrl = new URL(url);
   newUrl.searchParams.set('lang', locale);
-  return newUrl.toString();
+  return `${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
 }

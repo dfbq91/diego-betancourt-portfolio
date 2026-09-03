@@ -4,29 +4,33 @@ import { getLocale, getAlternateUrl, type Locale } from '../i18n/i18n';
 const currentLocale = getLocale(Astro.url);
 ---
 
-<div class="flex items-center gap-2">
+<div class="flex items-center gap-3">
   <a
     data-locale-link
     href={getAlternateUrl(Astro.url, 'es')}
-    class={`text-sm px-2 py-1 rounded transition-colors ${
-      currentLocale === 'es'
-        ? 'bg-blue-100 text-blue-700 font-medium'
-        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-    }`}
+    class="t-label"
+    style={`
+      color: ${currentLocale === 'es' ? 'var(--color-text-primary)' : 'var(--color-text-muted)'};
+      text-decoration: none;
+      transition: color 150ms ease-out;
+    `}
     aria-label="Cambiar a español"
+    aria-current={currentLocale === 'es' ? 'true' : undefined}
   >
     ES
   </a>
-  <span class="text-gray-300">|</span>
+  <span class="t-metadata" style="color: var(--color-border); user-select: none;">—</span>
   <a
     data-locale-link
     href={getAlternateUrl(Astro.url, 'en')}
-    class={`text-sm px-2 py-1 rounded transition-colors ${
-      currentLocale === 'en'
-        ? 'bg-blue-100 text-blue-700 font-medium'
-        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-    }`}
+    class="t-label"
+    style={`
+      color: ${currentLocale === 'en' ? 'var(--color-text-primary)' : 'var(--color-text-muted)'};
+      text-decoration: none;
+      transition: color 150ms ease-out;
+    `}
     aria-label="Switch to English"
+    aria-current={currentLocale === 'en' ? 'true' : undefined}
   >
     EN
   </a>

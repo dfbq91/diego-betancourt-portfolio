@@ -23,44 +23,144 @@ const experiences: Experience[] = (locale === 'en' ? experienceEn : experienceEs
 );
 
 function formatDate(dateStr: string): string {
-  const date = new Date(dateStr);
+  const date = new Date(dateStr + '-01');
   return date.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-CO', {
     month: 'short',
     year: 'numeric',
   });
 }
 
-function renderDescription(description: string): string[] {
-  return description.split('\n').filter(line => line.trim().startsWith('-'));
+function parseBullets(description: string): string[] {
+  return description.split('\n').filter(line => line.trim().startsWith('-')).map(line => line.replace(/^-\s*/, '').trim());
 }
 ---
 
-<section id="experience" class="py-16 px-4 md:px-8 scroll-mt-16">
-  <h2 data-i18n="experience" class="text-2xl font-bold text-gray-900 mb-8 pb-2 border-b border-gray-200">
-    {title}
-  </h2>
-  <div class="space-y-8">
-    {experiences.map((exp) => (
-      <div class="relative pl-6 border-l-2 border-gray-200">
-        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
-        <div class="space-y-2">
-          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-            <h3 class="text-lg font-semibold text-gray-900">{exp.position}</h3>
-            <span class="text-sm text-gray-500">
-              {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : presentLabel}
-            </span>
-          </div>
-          <p class="text-blue-600 font-medium">{exp.company}</p>
-          <ul class="space-y-1 text-gray-600 text-sm">
-            {renderDescription(exp.description).map((item) => (
-              <li class="flex items-start gap-2">
-                <span class="text-gray-400 mt-1.5">•</span>
-                <span>{item.replace(/^-\s*/, '')}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    ))}
+<!-- ============================================================
+     EXPERIENCE — T-9: Editorial Timeline
+     Open vertical layout, no card grid wrappers
+     ============================================================ -->
+<section
+  id="experience"
+  class="scroll-mt-14 md:scroll-mt-0"
+  style="
+    padding: 4rem 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+  "
+  aria-labelledby="experience-heading"
+>
+  <!-- Section header -->
+  <div style="margin-bottom: 3rem;">
+    <p class="t-metadata" style="color: var(--color-text-muted); margin-bottom: 0.75rem;">
+      {locale === 'en' ? '02 // Experience' : '02 // Experiencia'}
+    </p>
+    <h2
+      id="experience-heading"
+      class="t-h1"
+      data-i18n="experience"
+    >
+      {title}
+    </h2>
+  </div>
+
+  <!-- Timeline entries -->
+  <div style="max-width: 52rem;">
+    {experiences.map((exp, index) => {
+      const bullets = parseBullets(exp.description);
+      const isLast = index === experiences.length - 1;
+      const isCurrent = exp.endDate === null;
+      return (
+        <article
+          style={`
+            padding-bottom: 3rem;
+            ${!isLast ? 'margin-bottom: 3rem; border-bottom: 1px solid var(--color-border);' : ''}
+          `}
+        >
+          <!-- Role header -->
+          <header style="margin-bottom: 1.25rem;">
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 0.5rem 2rem;
+                margin-bottom: 0.375rem;
+              "
+            >
+              <h3 class="t-h2">{exp.position}</h3>
+              <span
+                class="t-metadata"
+                style="color: var(--color-text-muted); white-space: nowrap;"
+              >
+                {formatDate(exp.startDate)}
+                &nbsp;—&nbsp;
+                {isCurrent ? presentLabel : formatDate(exp.endDate!)}
+              </span>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <p
+                class="t-body-small"
+                style="color: var(--color-text-secondary); font-weight: 500;"
+              >
+                {exp.company}
+              </p>
+              {isCurrent && (
+                <span
+                  class="t-metadata"
+                  style="
+                    color: var(--color-text-primary);
+                    border: 1px solid var(--color-border);
+                    padding: 0.125rem 0.5rem;
+                    border-radius: 1px;
+                  "
+                >
+                  {locale === 'en' ? 'Current' : 'Actual'}
+                </span>
+              )}
+            </div>
+          </header>
+
+          <!-- Bullet points -->
+          {bullets.length > 0 && (
+            <ul
+              style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.625rem;
+              "
+            >
+              {bullets.map((item) => (
+                <li
+                  class="t-body-small"
+                  style="
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.75rem;
+                    color: var(--color-text-secondary);
+                  "
+                >
+                  <span
+                    class="t-metadata"
+                    style="
+                      color: var(--color-text-muted);
+                      margin-top: 0.2em;
+                      flex-shrink: 0;
+                      user-select: none;
+                    "
+                  >
+                    —
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </article>
+      );
+    })}
   </div>
 </section>

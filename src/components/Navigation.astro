@@ -5,155 +5,302 @@ import LanguageSelector from './LanguageSelector.astro';
 const locale = getLocale(Astro.url);
 const t = getTranslations(Astro.url);
 
-const navItems = ['about', 'experience', 'projects', 'chat', 'cv', 'contact'];
+const navItems = [
+  { id: 'about',      num: '01' },
+  { id: 'experience', num: '02' },
+  { id: 'projects',   num: '03' },
+  { id: 'chat',       num: '04' },
+  { id: 'cv',         num: '05' },
+  { id: 'contact',    num: '06' },
+];
 
-const getNavHref = (id: string) => {
-  return `/?lang=${locale}#${id}`;
-};
-
+const getNavHref = (id: string) => `/?lang=${locale}#${id}`;
 const blogHref = `/blog?lang=${locale}`;
 const logoHref = `/?lang=${locale}`;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200 md:border-b-0">
-  <nav class="flex items-center justify-between md:justify-start md:h-16 px-4 md:px-6">
-    <!-- Logo / Name -->
-    <a href={logoHref} class="font-semibold text-lg text-gray-900 hover:text-blue-600 transition-colors">
-      Diego Betancourt
+<!-- ============================================================
+     DESKTOP SIDEBAR NAVIGATION (≥768px)
+     ============================================================ -->
+<header
+  id="site-header"
+  class="fixed top-0 left-0 z-50 flex flex-col justify-between h-screen w-60 px-6 py-8 border-r"
+  style="
+    background: var(--color-bg);
+    border-color: var(--color-border);
+    display: none;
+  "
+  aria-label="Navegación principal"
+>
+  <!-- Logo / Name -->
+  <div>
+    <a
+      href={logoHref}
+      class="block mb-10 nav-logo"
+      aria-label="Diego Betancourt — inicio"
+    >
+      <span class="t-label" style="color: var(--color-text-secondary);">Diego Betancourt</span>
+      <br />
+      <span class="t-metadata" style="margin-top: 0.25rem; display: block;">Software Engineer</span>
     </a>
 
-    <!-- Desktop Navigation -->
-    <ul class="hidden md:flex items-center gap-6 ml-8">
-      {navItems.map((id) => (
-        <li>
+    <!-- Desktop Nav Links -->
+    <nav aria-label="Secciones">
+      <ul class="flex flex-col gap-1" role="list">
+        {navItems.map(({ id, num }) => (
+          <li>
+            <a
+              href={getNavHref(id)}
+              data-section={id}
+              class="nav-link flex items-center gap-3 py-2 group"
+              style="text-decoration: none;"
+            >
+              <span
+                class="nav-num t-metadata"
+                style="color: var(--color-text-muted); min-width: 1.5rem; transition: color 150ms ease-out;"
+              >
+                {num}
+              </span>
+              <span
+                class="nav-label t-nav"
+                style="color: var(--color-text-muted); transition: color 150ms ease-out;"
+                data-i18n={id}
+              >
+                {t.nav[id as keyof typeof t.nav]}
+              </span>
+            </a>
+          </li>
+        ))}
+        <!-- Blog -->
+        <li style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--color-border);">
           <a
-            href={getNavHref(id)}
-            data-section={id}
-            class="nav-link text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors scroll-mt-16"
+            href={blogHref}
+            class="flex items-center gap-3 py-2"
+            style="text-decoration: none;"
           >
-            <span data-i18n={id}>{t.nav[id as keyof typeof t.nav]}</span>
+            <span class="t-metadata" style="color: var(--color-text-muted); min-width: 1.5rem;">07</span>
+            <span class="t-nav" style="color: var(--color-text-muted);" data-i18n="blog">
+              {t.nav.blog}
+            </span>
           </a>
         </li>
-      ))}
-      <li>
-        <a
-          href={blogHref}
-          class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-        >
-          <span data-i18n="blog">{t.nav.blog}</span>
-        </a>
-      </li>
-    </ul>
+      </ul>
+    </nav>
+  </div>
 
-    <!-- Language Selector (Desktop) -->
-    <div class="hidden md:flex items-center gap-2 ml-auto">
-      <LanguageSelector />
-    </div>
-
-    <!-- Mobile Menu Button -->
-    <button
-      id="menu-toggle"
-      class="md:hidden p-2 text-gray-600 hover:text-gray-900"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden bg-white border-t border-gray-200"
-  >
-    <ul class="flex flex-col px-4 py-4 gap-2">
-      {navItems.map((id) => (
-        <li>
-          <a
-            href={getNavHref(id)}
-            data-section={id}
-            class="mobile-nav-link block py-2 text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <span data-i18n={id}>{t.nav[id as keyof typeof t.nav]}</span>
-          </a>
-        </li>
-      ))}
-      <li>
-        <a href={blogHref} class="block py-2 text-gray-600 hover:text-gray-900 transition-colors">
-          <span data-i18n="blog">{t.nav.blog}</span>
-        </a>
-      </li>
-      <!-- Language Selector (Mobile) -->
-      <li class="flex gap-4 pt-2 border-t border-gray-200 mt-2">
-        <a
-          data-locale-link
-          href={getAlternateUrl(Astro.url, 'es')}
-          class={`text-sm px-3 py-1 rounded ${locale === 'es' ? 'bg-blue-100 text-blue-700' : 'text-gray-600'}`}
-        >
-          Español
-        </a>
-        <a
-          data-locale-link
-          href={getAlternateUrl(Astro.url, 'en')}
-          class={`text-sm px-3 py-1 rounded ${locale === 'en' ? 'bg-blue-100 text-blue-700' : 'text-gray-600'}`}
-        >
-          English
-        </a>
-      </li>
-    </ul>
+  <!-- Language Selector (Desktop) -->
+  <div>
+    <LanguageSelector />
   </div>
 </header>
 
+<!-- ============================================================
+     MOBILE TOP BAR (<768px)
+     ============================================================ -->
+<div
+  id="mobile-bar"
+  class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 h-14"
+  style="
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  "
+>
+  <a
+    href={logoHref}
+    style="text-decoration: none;"
+    aria-label="Diego Betancourt — inicio"
+  >
+    <span class="t-label" style="color: var(--color-text-secondary);">Diego Betancourt</span>
+  </a>
+
+  <!-- Hamburger -->
+  <button
+    id="menu-toggle"
+    aria-label="Abrir menú"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    style="background: none; border: none; cursor: pointer; padding: 0.25rem; color: var(--color-text-secondary);"
+  >
+    <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+    <svg id="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  </button>
+</div>
+
+<!-- ============================================================
+     MOBILE MENU OVERLAY
+     ============================================================ -->
+<div
+  id="mobile-menu"
+  aria-hidden="true"
+  style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: 3.5rem;
+    z-index: 40;
+    background: var(--color-bg);
+    padding: 2rem 1.25rem;
+    overflow-y: auto;
+  "
+>
+  <nav aria-label="Menú móvil">
+    <ul class="flex flex-col" role="list" style="gap: 0;">
+      {navItems.map(({ id, num }) => (
+        <li style="border-bottom: 1px solid var(--color-border);">
+          <a
+            href={getNavHref(id)}
+            data-section={id}
+            class="mobile-nav-link flex items-center gap-4 py-4"
+            style="text-decoration: none;"
+          >
+            <span class="t-metadata" style="color: var(--color-text-muted); min-width: 1.5rem;">{num}</span>
+            <span class="t-h2" style="color: var(--color-text-secondary);" data-i18n={id}>
+              {t.nav[id as keyof typeof t.nav]}
+            </span>
+          </a>
+        </li>
+      ))}
+      <!-- Blog -->
+      <li style="border-bottom: 1px solid var(--color-border);">
+        <a
+          href={blogHref}
+          class="mobile-nav-link flex items-center gap-4 py-4"
+          style="text-decoration: none;"
+        >
+          <span class="t-metadata" style="color: var(--color-text-muted); min-width: 1.5rem;">07</span>
+          <span class="t-h2" style="color: var(--color-text-secondary);" data-i18n="blog">
+            {t.nav.blog}
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Language selector mobile -->
+    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+      <div class="flex gap-4">
+        <a
+          data-locale-link
+          href={getAlternateUrl(Astro.url, 'es')}
+          class="t-label"
+          style={`color: ${locale === 'es' ? 'var(--color-text-primary)' : 'var(--color-text-muted)'}; text-decoration: none;`}
+          aria-label="Cambiar a español"
+        >
+          ES
+        </a>
+        <span class="t-metadata" style="color: var(--color-border);">—</span>
+        <a
+          data-locale-link
+          href={getAlternateUrl(Astro.url, 'en')}
+          class="t-label"
+          style={`color: ${locale === 'en' ? 'var(--color-text-primary)' : 'var(--color-text-muted)'}; text-decoration: none;`}
+          aria-label="Switch to English"
+        >
+          EN
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+
 <script>
-  // Mobile menu toggle
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.querySelector('.menu-icon');
-  const closeIcon = document.querySelector('.close-icon');
+  // ============================================================
+  // RESPONSIVE: show correct nav based on viewport
+  // ============================================================
+  function initNav() {
+    const siteHeader = document.getElementById('site-header');
+    const mobileBar  = document.getElementById('mobile-bar');
 
-  menuToggle?.addEventListener('click', () => {
-    const isOpen = !mobileMenu?.classList.contains('hidden');
-    mobileMenu?.classList.toggle('hidden');
-    menuIcon?.classList.toggle('hidden');
-    closeIcon?.classList.toggle('hidden');
-    menuToggle.setAttribute('aria-expanded', String(!isOpen));
-  });
+    function applyLayout() {
+      const isDesktop = window.innerWidth >= 768;
+      if (siteHeader) siteHeader.style.display = isDesktop ? 'flex' : 'none';
+      if (mobileBar)  mobileBar.style.display  = isDesktop ? 'none' : 'flex';
+    }
 
-  // Close mobile menu on link click
-  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
+    applyLayout();
+    window.addEventListener('resize', applyLayout);
+
+    // ============================================================
+    // MOBILE MENU TOGGLE
+    // ============================================================
+    const menuToggle  = document.getElementById('menu-toggle');
+    const mobileMenu  = document.getElementById('mobile-menu');
+    const iconMenu    = document.getElementById('icon-menu');
+    const iconClose   = document.getElementById('icon-close');
+
+    function openMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.style.display  = 'block';
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      menuToggle?.setAttribute('aria-expanded', 'true');
+      menuToggle?.setAttribute('aria-label', 'Cerrar menú');
+      if (iconMenu)  iconMenu.style.display  = 'none';
+      if (iconClose) iconClose.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.style.display  = 'none';
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      menuToggle?.setAttribute('aria-expanded', 'false');
+      menuToggle?.setAttribute('aria-label', 'Abrir menú');
+      if (iconMenu)  iconMenu.style.display  = 'block';
+      if (iconClose) iconClose.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    menuToggle?.addEventListener('click', () => {
+      const isOpen = mobileMenu?.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMenu() : openMenu();
     });
-  });
 
-  // Scroll spy
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '-20% 0px -70% 0px',
-    threshold: 0,
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach((link) => {
-          link.classList.remove('text-blue-600', 'font-semibold');
-          if (link.getAttribute('data-section') === id) {
-            link.classList.add('text-blue-600', 'font-semibold');
-          }
-        });
-      }
+    // Close menu when a mobile nav link is clicked
+    document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+      link.addEventListener('click', closeMenu);
     });
-  }, observerOptions);
 
-  sections.forEach((section) => observer.observe(section));
+    // ============================================================
+    // SCROLL SPY — T-6: subtle monochrome state shifts
+    // ============================================================
+    const sections  = document.querySelectorAll('section[id]');
+    const navLinks  = document.querySelectorAll('.nav-link');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-15% 0px -70% 0px',
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach((link) => {
+            const isActive = link.getAttribute('data-section') === id;
+            const label = link.querySelector('.nav-label') as HTMLElement | null;
+            const num   = link.querySelector('.nav-num') as HTMLElement | null;
+
+            if (label) label.style.color = isActive
+              ? 'var(--color-text-primary)'
+              : 'var(--color-text-muted)';
+            if (num) num.style.color = isActive
+              ? 'var(--color-text-secondary)'
+              : 'var(--color-text-muted)';
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
 </script>

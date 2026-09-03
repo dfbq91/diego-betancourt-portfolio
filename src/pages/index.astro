@@ -12,10 +12,34 @@ import { getTranslations } from '../i18n/i18n';
 const t = getTranslations(Astro.url);
 ---
 
-<Base title="Diego Betancourt - Software Engineer" description={t.meta.description}>
+<Base title="Diego Betancourt — Software Engineer" description={t.meta.description}>
   <Navigation />
 
-  <main class="md:ml-64 pt-16 md:pt-0">
+  <!-- Content offset: desktop ml-60, mobile pt-14 -->
+  <main
+    style="
+      padding-top: 3.5rem;
+      max-width: 100%;
+    "
+    id="main-content"
+  >
+    <!-- Desktop offset applied via script to avoid flash -->
+    <script is:inline>
+      function setMainOffset() {
+        const main = document.getElementById('main-content');
+        if (!main) return;
+        if (window.innerWidth >= 768) {
+          main.style.marginLeft = '15rem'; /* 240px sidebar */
+          main.style.paddingTop = '0';
+        } else {
+          main.style.marginLeft = '0';
+          main.style.paddingTop = '3.5rem';
+        }
+      }
+      setMainOffset();
+      window.addEventListener('resize', setMainOffset);
+    </script>
+
     <AboutSection title={t.about.title} />
     <ExperienceSection title={t.experience.title} presentLabel={t.experience.present} />
     <ProjectsSection title={t.projects.title} demoLabel={t.projects.demo} repoLabel={t.projects.repo} />

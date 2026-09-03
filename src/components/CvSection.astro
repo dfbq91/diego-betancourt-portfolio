@@ -1,5 +1,6 @@
 ---
 import config from '../data/config.json';
+import { getLocale } from '../i18n/i18n';
 
 interface Props {
   title: string;
@@ -7,22 +8,64 @@ interface Props {
 }
 
 const { title, downloadLabel } = Astro.props;
+const locale = getLocale(Astro.url);
 ---
 
-<section id="cv" class="py-16 px-4 md:px-8 scroll-mt-16">
-  <h2 data-i18n="cv" class="text-2xl font-bold text-gray-900 mb-8 pb-2 border-b border-gray-200">
-    {title}
-  </h2>
-  <div class="flex justify-center">
+<!-- ============================================================
+     CV SECTION — T-13: Centralized config path, clean text trigger
+     ============================================================ -->
+<section
+  id="cv"
+  class="scroll-mt-14 md:scroll-mt-0"
+  style="
+    padding: 4rem 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+  "
+  aria-labelledby="cv-heading"
+>
+  <div style="max-width: 52rem;">
+    <!-- Section header -->
+    <div style="margin-bottom: 2.5rem;">
+      <p class="t-metadata" style="color: var(--color-text-muted); margin-bottom: 0.75rem;">
+        {locale === 'en' ? '05 // Resume' : '05 // Hoja de Vida'}
+      </p>
+      <h2
+        id="cv-heading"
+        class="t-h1"
+        data-i18n="cv"
+      >
+        {title}
+      </h2>
+    </div>
+
+    <!-- CV download trigger -->
     <a
       href={config.cv.file}
       download
-      class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+      id="cv-download"
+      style="
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        border: 1px solid var(--color-border);
+        padding: 0.875rem 1.5rem;
+        color: var(--color-text-secondary);
+        transition: color 150ms ease-out, border-color 150ms ease-out;
+      "
+      aria-label={`${downloadLabel} — PDF`}
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-      {downloadLabel}
+      <span class="t-label">
+        {downloadLabel}
+      </span>
+      <span class="t-metadata" style="color: var(--color-text-muted);">↓ PDF</span>
     </a>
   </div>
 </section>
+
+<style>
+  #cv-download:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-text-muted);
+  }
+</style>
