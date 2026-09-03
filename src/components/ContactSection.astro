@@ -6,97 +6,383 @@ interface Props {
   title: string;
   linkedinLabel: string;
   githubLabel: string;
+  emailLabel: string;
+  emailCardLabel: string;
+  emailSubjectLabel: string;
+  emailMessageLabel: string;
+  emailSendLabel: string;
+  emailSendingLabel: string;
+  emailSuccessMessage: string;
+  emailErrorMessage: string;
+  emailCloseLabel: string;
+  emailSubjectPlaceholder: string;
+  emailMessagePlaceholder: string;
 }
 
-const { title, linkedinLabel, githubLabel } = Astro.props;
+const {
+  title,
+  linkedinLabel,
+  githubLabel,
+  emailLabel,
+  emailCardLabel,
+  emailSubjectLabel,
+  emailMessageLabel,
+  emailSendLabel,
+  emailSendingLabel,
+  emailSuccessMessage,
+  emailErrorMessage,
+  emailCloseLabel,
+  emailSubjectPlaceholder,
+  emailMessagePlaceholder
+} = Astro.props;
 const locale = getLocale(Astro.url);
 ---
 
 <!-- ============================================================
-     CONTACT SECTION — T-13: Minimalist text links
+     2-column layout: direct email & terminal specs + interactive social cards
      ============================================================ -->
 <section
   id="contact"
-  class="scroll-mt-14 md:scroll-mt-0"
-  style="
-    padding: 4rem 2.5rem 6rem;
-  "
+  class="relative py-20 border-b border-[var(--border)] scroll-mt-20"
   aria-labelledby="contact-heading"
 >
-  <div style="max-width: 52rem;">
-    <!-- Section header -->
-    <div style="margin-bottom: 3rem;">
-      <p class="t-metadata" style="color: var(--color-text-muted); margin-bottom: 0.75rem;">
-        {locale === 'en' ? '06 // Contact' : '06 // Contacto'}
-      </p>
-      <h2
-        id="contact-heading"
-        class="t-h1"
-        data-i18n="contact"
-      >
-        {title}
-      </h2>
+  <div class="max-w-[1200px] mx-auto">
+    <!-- Section Header -->
+    <div class="flex items-baseline justify-between gap-6 mb-10 pb-5 border-b border-[var(--border)]">
+      <div>
+        <div class="font-mono text-[12px] text-[var(--text-dim)] tracking-[0.06em]">
+          <span class="text-[var(--accent)] mr-2">06</span>{locale === 'en' ? 'GET IN TOUCH' : 'CONTACTO DIRECTO'}
+        </div>
+        <h2
+          id="contact-heading"
+          class="font-mono font-medium text-[clamp(26px,3.5vw,38px)] tracking-[-0.03em] text-[var(--text-bright)] mt-2 mb-0"
+          data-i18n="contact"
+        >
+          {title}
+        </h2>
+      </div>
+
+      <div class="font-mono text-[12px] text-[var(--text-dim)] text-right hidden sm:block">
+        ~/contact<br />
+        <span class="text-[var(--accent)]">● {locale === 'en' ? 'replies in < 24h' : 'respuesta en < 24h'}</span>
+      </div>
     </div>
 
-    <!-- Social links as text triggers -->
-    <div
-      style="
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        border-top: 1px solid var(--color-border);
-      "
-    >
-      <a
-        href={config.social.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        id="contact-linkedin"
-        style="
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
-          padding: 1.25rem 0;
-          border-bottom: 1px solid var(--color-border);
-          text-decoration: none;
-          color: var(--color-text-secondary);
-          transition: color 150ms ease-out;
-          gap: 1rem;
-        "
-        aria-label={`${linkedinLabel} — ${locale === 'en' ? 'opens in new tab' : 'abre en nueva pestaña'}`}
-      >
-        <span class="t-h2">{linkedinLabel}</span>
-        <span class="t-metadata" style="color: var(--color-text-muted); flex-shrink: 0;">↗</span>
-      </a>
+    <!-- 2-Column Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 items-start">
+      <!-- Left Column: Big direct email & terminal status table -->
+      <div class="flex flex-col gap-8">
+        <!-- Terminal specs list -->
+        <div class="flex flex-col gap-2.5 font-mono text-[13px] border-l-2 border-[var(--border)] pl-4 py-1">
+          <div>
+            <span class="text-[var(--text-faint)] mr-3 select-none">location</span>
+            <span class="text-[var(--text-bright)]">Colombia · GMT-5</span>
+          </div>
+          <div>
+            <span class="text-[var(--text-faint)] mr-3 select-none">status</span>
+            <span class="text-[var(--accent)]">{locale === 'en' ? 'accepting opportunities · 2026' : 'abierto a proyectos · 2026'}</span>
+          </div>
+          <div>
+            <span class="text-[var(--text-faint)] mr-3 select-none">github</span>
+            <a href={config.social.github} target="_blank" rel="noopener noreferrer" class="text-[var(--text-bright)] hover:text-[var(--accent)] no-underline">
+              @dfbq91
+            </a>
+          </div>
+          <div>
+            <span class="text-[var(--text-faint)] mr-3 select-none">linkedin</span>
+            <a href={config.social.linkedin} target="_blank" rel="noopener noreferrer" class="text-[var(--text-bright)] hover:text-[var(--accent)] no-underline">
+              in/diegofernandobetancourtquintero
+            </a>
+          </div>
+        </div>
+      </div>
 
-      <a
-        href={config.social.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        id="contact-github"
-        style="
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
-          padding: 1.25rem 0;
-          border-bottom: 1px solid var(--color-border);
-          text-decoration: none;
-          color: var(--color-text-secondary);
-          transition: color 150ms ease-out;
-          gap: 1rem;
-        "
-        aria-label={`${githubLabel} — ${locale === 'en' ? 'opens in new tab' : 'abre en nueva pestaña'}`}
-      >
-        <span class="t-h2">{githubLabel}</span>
-        <span class="t-metadata" style="color: var(--color-text-muted); flex-shrink: 0;">↗</span>
-      </a>
+      <!-- Right Column: Interactive Profile & Professional Channels Card -->
+      <div class="tech-card p-6 rounded-xl flex flex-col gap-4">
+        <div class="flex items-center justify-between font-mono text-[12px] border-b border-dashed border-[var(--border)] pb-3 text-[var(--text-dim)]">
+          <span class="text-[var(--accent)]">// {locale === 'en' ? 'CONNECT' : 'CONECTAR'}</span>
+          <span class="text-[var(--text-faint)]">verified channels</span>
+        </div>
+
+        <div class="flex flex-col gap-3 pt-2">
+          <!-- LinkedIn Trigger Link (Preserves exact ID and aria labels for e2e tests) -->
+          <a
+            href={config.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="contact-linkedin"
+            class="flex items-center justify-between p-3.5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-bright)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150 no-underline group"
+            aria-label={`${linkedinLabel} — ${locale === 'en' ? 'opens in new tab' : 'abre en nueva pestaña'}`}
+          >
+            <div class="flex items-center gap-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-[var(--text-dim)] group-hover:text-[var(--accent)] transition-colors">
+                <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S.02 4.88.02 3.5 1.13 1 2.5 1s2.48 1.12 2.48 2.5M.22 8h4.56v14H.22zm7.5 0h4.37v1.91h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7V22h-4.56v-6.61c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V22H7.72z"></path>
+              </svg>
+              <span class="font-mono text-[14px] font-medium">{linkedinLabel}</span>
+            </div>
+            <span class="font-mono text-[13px] text-[var(--accent)] group-hover:translate-x-0.5 transition-transform">↗</span>
+          </a>
+
+          <!-- GitHub Trigger Link (Preserves exact ID and aria labels for e2e tests) -->
+          <a
+            href={config.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="contact-github"
+            class="flex items-center justify-between p-3.5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-bright)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150 no-underline group"
+            aria-label={`${githubLabel} — ${locale === 'en' ? 'opens in new tab' : 'abre en nueva pestaña'}`}
+          >
+            <div class="flex items-center gap-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-[var(--text-dim)] group-hover:text-[var(--accent)] transition-colors">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.05.78 2.13v3.16c0 .31.21.68.79.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"></path>
+              </svg>
+              <span class="font-mono text-[14px] font-medium">{githubLabel}</span>
+            </div>
+              <span class="font-mono text-[13px] text-[var(--accent)] group-hover:translate-x-0.5 transition-transform">↗</span>
+          </a>
+
+          <!-- Email Trigger (opens the contact modal) -->
+          <button
+            type="button"
+            id="contact-email"
+            data-contact-email-trigger
+            class="flex items-center justify-between p-3.5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-bright)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-150 no-underline group cursor-pointer text-left"
+            aria-label={`${emailCardLabel} — ${locale === 'en' ? 'opens a form' : 'abre un formulario'}`}
+          >
+            <div class="flex items-center gap-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-[var(--text-dim)] group-hover:text-[var(--accent)] transition-colors">
+                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                <path d="m22 7-10 6L2 7"></path>
+              </svg>
+              <span class="font-mono text-[14px] font-medium">{emailLabel}</span>
+            </div>
+            <span class="font-mono text-[13px] text-[var(--accent)] group-hover:translate-x-0.5 transition-transform">→</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<style>
-  #contact-linkedin:hover,
-  #contact-github:hover {
-    color: var(--color-text-primary);
+<!-- ============================================================
+     Contact Email Modal
+     ============================================================ -->
+<div
+  class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+  data-contact-modal
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="contact-modal-title"
+  data-success-message={emailSuccessMessage}
+  data-error-message={emailErrorMessage}
+  data-sending-label={emailSendingLabel}
+  data-send-label={emailSendLabel}
+  data-close-label={emailCloseLabel}
+  hidden
+>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-contact-modal-dismiss></div>
+
+  <!-- Modal Panel -->
+  <div class="relative w-full max-w-md tech-card rounded-xl p-6 shadow-[var(--shadow-card)] z-10">
+    <span class="corner-bracket-tl"></span>
+    <span class="corner-bracket-tr"></span>
+    <span class="corner-bracket-bl"></span>
+    <span class="corner-bracket-br"></span>
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-5 pb-4 border-b border-dashed border-[var(--border)]">
+      <h3 id="contact-modal-title" class="font-mono font-medium text-[16px] text-[var(--text-bright)] m-0">
+        <span class="text-[var(--accent)] mr-2">✉</span>{emailLabel}
+      </h3>
+      <button
+        type="button"
+        class="font-mono text-[12px] px-2 py-1 rounded border border-[var(--border-strong)] text-[var(--text-dim)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors cursor-pointer"
+        data-contact-modal-close
+        aria-label={emailCloseLabel}
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- Status line -->
+    <p
+      class="hidden mb-4 font-mono text-[12px] text-[var(--accent)] py-1 select-none"
+      data-contact-modal-status
+      role="status"
+    ></p>
+
+    <!-- Form -->
+    <form class="flex flex-col gap-4" data-contact-email-form novalidate>
+      <div>
+        <label for="contact-email-subject" class="block font-mono text-[12px] text-[var(--text-dim)] mb-1.5">
+          {emailSubjectLabel}
+        </label>
+        <input
+          id="contact-email-subject"
+          name="subject"
+          type="text"
+          required
+          maxlength="200"
+          autocomplete="off"
+          placeholder={emailSubjectPlaceholder}
+          class="w-full font-mono text-[13px] text-[var(--text-bright)] bg-[var(--surface-2)] border border-[var(--border)] rounded-lg px-3 py-2.5 outline-none placeholder:text-[var(--text-faint)] transition-colors duration-150 focus:border-[var(--accent)]"
+          data-contact-email-subject
+        />
+      </div>
+
+      <div>
+        <label for="contact-email-message" class="block font-mono text-[12px] text-[var(--text-dim)] mb-1.5">
+          {emailMessageLabel}
+        </label>
+        <textarea
+          id="contact-email-message"
+          name="message"
+          required
+          maxlength="5000"
+          rows="6"
+          placeholder={emailMessagePlaceholder}
+          class="w-full font-mono text-[13px] text-[var(--text-bright)] bg-[var(--surface-2)] border border-[var(--border)] rounded-lg px-3 py-2.5 resize-none outline-none placeholder:text-[var(--text-faint)] transition-colors duration-150 focus:border-[var(--accent)]"
+          data-contact-email-message
+        ></textarea>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-1">
+        <button
+          type="button"
+          class="font-mono text-[12px] px-4 py-2 rounded-lg border border-[var(--border-strong)] text-[var(--text-dim)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors cursor-pointer"
+          data-contact-modal-close
+        >
+          {emailCloseLabel}
+        </button>
+        <button
+          type="submit"
+          class="btn-accent"
+          data-contact-email-submit
+        >
+          {emailSendLabel}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  interface ModalElements {
+    modal: HTMLElement;
+    form: HTMLFormElement;
+    subject: HTMLInputElement;
+    message: HTMLTextAreaElement;
+    submit: HTMLButtonElement;
+    status: HTMLElement;
+    closeButtons: NodeListOf<HTMLElement>;
+    dismiss: HTMLElement;
   }
-</style>
+
+  const getElements = (): ModalElements | null => {
+    const modal = document.querySelector<HTMLElement>('[data-contact-modal]');
+    if (!modal) return null;
+    const form = modal.querySelector<HTMLFormElement>('[data-contact-email-form]');
+    const subject = modal.querySelector<HTMLInputElement>('[data-contact-email-subject]');
+    const message = modal.querySelector<HTMLTextAreaElement>('[data-contact-email-message]');
+    const submit = modal.querySelector<HTMLButtonElement>('[data-contact-email-submit]');
+    const status = modal.querySelector<HTMLElement>('[data-contact-modal-status]');
+    const closeButtons = modal.querySelectorAll<HTMLElement>('[data-contact-modal-close]');
+    const dismiss = modal.querySelector<HTMLElement>('[data-contact-modal-dismiss]');
+    if (!form || !subject || !message || !submit || !status || !dismiss) return null;
+    return { modal, form, subject, message, submit, status, closeButtons, dismiss };
+  };
+
+  const openModal = (elements: ModalElements): void => {
+    elements.modal.hidden = false;
+    elements.modal.classList.remove('hidden');
+    elements.modal.classList.add('flex');
+    elements.status.classList.add('hidden');
+    elements.status.textContent = '';
+    elements.submit.textContent = elements.modal.dataset.sendLabel ?? '';
+    elements.submit.disabled = false;
+    elements.form.reset();
+    (elements.form.querySelector<HTMLElement>('input, textarea'))?.focus();
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = (elements: ModalElements): void => {
+    elements.modal.hidden = true;
+    elements.modal.classList.add('hidden');
+    elements.modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  };
+
+  const initializeContactModal = (): void => {
+    const elements = getElements();
+    if (!elements) return;
+
+    const sync = (): void => {
+      document.querySelectorAll<HTMLElement>('[data-contact-email-trigger]').forEach((btn) => {
+        btn.onclick = () => openModal(elements);
+      });
+      elements.closeButtons.forEach((btn) => {
+        btn.onclick = () => closeModal(elements);
+      });
+      elements.dismiss.onclick = () => closeModal(elements);
+    };
+
+    sync();
+    document.addEventListener('astro:page-load', sync);
+
+    elements.form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const sendingLabel = elements.modal.dataset.sendingLabel ?? '';
+      const successMessage = elements.modal.dataset.successMessage ?? '';
+      const errorMessage = elements.modal.dataset.errorMessage ?? '';
+
+      const subject = elements.subject.value.trim();
+      const message = elements.message.value.trim();
+
+      if (!subject || !message) return;
+
+      elements.submit.disabled = true;
+      elements.submit.textContent = sendingLabel;
+      elements.status.classList.remove('hidden');
+      elements.status.textContent = sendingLabel;
+      elements.status.className = 'mb-4 font-mono text-[12px] text-[var(--accent)] py-1 select-none';
+
+      try {
+        const response = await fetch('/api/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subject, message })
+        });
+
+        if (response.ok) {
+          elements.status.className = 'mb-4 font-mono text-[12px] text-[var(--accent)] py-1 select-none';
+          elements.status.textContent = successMessage;
+          elements.subject.value = '';
+          elements.message.value = '';
+          elements.submit.textContent = elements.modal.dataset.sendLabel ?? '';
+          setTimeout(() => closeModal(elements), 1200);
+        } else {
+          throw new Error(`Email request failed: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('email form failure', error);
+        elements.status.className = 'mb-4 font-mono text-[12px] text-[#ff5c5c] py-1 select-none';
+        elements.status.textContent = errorMessage;
+        elements.submit.textContent = elements.modal.dataset.sendLabel ?? '';
+        elements.submit.disabled = false;
+      }
+    });
+  };
+
+  initializeContactModal();
+  document.addEventListener('astro:page-load', initializeContactModal);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const elements = getElements();
+    if (elements && !elements.modal.hidden) closeModal(elements);
+  });
+</script>
+

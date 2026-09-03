@@ -9,18 +9,50 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
 endobj
 4 0 obj
-<< /Length 654 >>
+<< /Length 3281 >>
 stream
-BT /F1 28 Tf 72 740 Td (Diego Betancourt) Tj ET
-BT /F1 16 Tf 72 700 Td (Software Engineer) Tj ET
-BT /F1 11 Tf 72 672 Td (Colombia) Tj ET
-BT /F1 10 Tf 72 648 Td (linkedin.com/in/diegobetancourt  |  github.com/diegobetancourt) Tj ET
-BT /F1 16 Tf 72 612 Td (Experience) Tj ET
-BT /F1 11 Tf 72 588 Td (Senior Software Engineer - Tech Solutions SAS \(2022 - Present\)) Tj ET
-BT /F1 11 Tf 72 570 Td (Full Stack Developer - Digital Innovation Labs \(2020 - 2022\)) Tj ET
-BT /F1 11 Tf 72 552 Td (Junior Developer - StartupHub \(2019\)) Tj ET
-BT /F1 16 Tf 72 524 Td (Skills) Tj ET
-BT /F1 11 Tf 72 500 Td (TypeScript, React, Node.js, Astro, PostgreSQL, CI/CD) Tj ET
+BT /F1 24 Tf 72 760 Td (Diego Fernando Betancourt Quintero) Tj ET
+BT /F1 13 Tf 72 738 Td (Senior Software Engineer) Tj ET
+BT /F1 11 Tf 72 724 Td (Distributed Systems | Cloud Architecture | Digital Identity) Tj ET
+BT /F1 10 Tf 72 706 Td (dfbq91@gmail.com  |  +57 316 415 1780  |  Bogota, Colombia) Tj ET
+BT /F1 10 Tf 72 692 Td (linkedin.com/in/diegofernandobetancourtquintero) Tj ET
+
+BT /F1 14 Tf 72 660 Td (SUMMARY) Tj ET
+BT /F1 10 Tf 72 644 Td (6+ years designing and scaling distributed, event-driven systems on AWS: from) Tj ET
+BT /F1 10 Tf 72 632 Td (high-concurrency digital identity/auth platforms to serverless orchestration) Tj ET
+BT /F1 10 Tf 72 620 Td (layers. Measurable impact: +53% conversion, -60% response time, -13% infra cost.) Tj ET
+
+BT /F1 14 Tf 72 588 Td (EXPERIENCE) Tj ET
+BT /F1 11 Tf 72 572 Td (Senior Software Engineer - Banco de Bogota \(Nov 2021 - Present\)) Tj ET
+BT /F1 10 Tf 72 556 Td (- Multi-factor digital identity platform for millions of banking users; lead team of 9) Tj ET
+BT /F1 10 Tf 72 544 Td (- Biometric onboarding \(MediaPipe, TensorFlow, microfrontends\): 53% conversion) Tj ET
+BT /F1 10 Tf 72 532 Td (- Event-driven serverless orchestration \(EventBridge, SQS FIFO, Lambda, DynamoDB\)) Tj ET
+BT /F1 10 Tf 72 520 Td (- Real-time fraud detection cut review response time by 60%) Tj ET
+BT /F1 10 Tf 72 508 Td (- Migrated to Terraform/IaC, reducing cloud costs by 13%; conversion +11% via data) Tj ET
+BT /F1 11 Tf 72 484 Td (Full Stack Developer - Banco de Bogota \(Jun 2019 - Oct 2021\)) Tj ET
+BT /F1 10 Tf 72 468 Td (- Auth microservices in Python \(Flask\) and TypeScript \(Express\) on AWS) Tj ET
+BT /F1 10 Tf 72 456 Td (- Angular/React frontends for high-traffic digital onboarding flows) Tj ET
+BT /F1 10 Tf 72 444 Td (- CI/CD pipelines \(CircleCI, GitHub Actions\) increased deployment frequency) Tj ET
+
+BT /F1 14 Tf 72 412 Td (SKILLS) Tj ET
+BT /F1 10 Tf 72 396 Td (Languages: TypeScript, JavaScript, Python, Java, Go, SQL) Tj ET
+BT /F1 10 Tf 72 384 Td (Backend: Node.js, Express, Fastify, Flask, FastAPI, Spring Boot, Go Fiber) Tj ET
+BT /F1 10 Tf 72 372 Td (AWS: ECS, EC2, Lambda, API Gateway, DynamoDB, Aurora, RDS, SQS, SNS, EventBridge,) Tj ET
+BT /F1 10 Tf 72 360 Td (      Rekognition, Cognito, CloudWatch, S3) Tj ET
+BT /F1 10 Tf 72 348 Td (DevOps/IaC: Terraform, Docker, CI/CD, GitHub Actions, CircleCI) Tj ET
+BT /F1 10 Tf 72 336 Td (Data: PostgreSQL, Redis, Elasticsearch | Frontend: React, Angular) Tj ET
+BT /F1 10 Tf 72 324 Td (Identity/Security: MFA, Biometric Auth, OAuth 2.0, JWT, KYC | Observability: Grafana,) Tj ET
+BT /F1 10 Tf 72 312 Td (      CloudWatch, Elasticsearch, OpenTelemetry) Tj ET
+
+BT /F1 14 Tf 72 280 Td (PROJECT) Tj ET
+BT /F1 10 Tf 72 264 Td (Ingenioempresa.com \(2017 - Present\): Founded and grew a business/process) Tj ET
+BT /F1 10 Tf 72 252 Td (improvement content platform to 20,000 daily organic visits via SEO, analytics and) Tj ET
+BT /F1 10 Tf 72 240 Td (technical writing.) Tj ET
+
+BT /F1 14 Tf 72 208 Td (EDUCATION / CERTIFICATION) Tj ET
+BT /F1 10 Tf 72 192 Td (Industrial Engineering - Universidad de San Buenaventura \(2016\)) Tj ET
+BT /F1 10 Tf 72 180 Td (AWS Certified Cloud Practitioner) Tj ET
+BT /F1 10 Tf 72 164 Td (Languages: Spanish \(Native\), English \(B2 - Upper-Intermediate\)) Tj ET
 endstream
 endobj
 5 0 obj
@@ -33,9 +65,9 @@ xref
 0000000058 00000 n 
 0000000115 00000 n 
 0000000241 00000 n 
-0000000946 00000 n 
+0000003573 00000 n 
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-1016
+3643
 %%EOF

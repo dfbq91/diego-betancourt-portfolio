@@ -3,30 +3,25 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Navigation from '../../components/Navigation.astro';
 import BlogCard from '../../components/BlogCard.astro';
+import Footer from '../../components/Footer.astro';
 import { getLocale, getTranslations } from '../../i18n/i18n';
-import { getStaticPosts, type BlogPost } from '../../utils/blog';
 
 const t = getTranslations(Astro.url);
 const locale = getLocale(Astro.url);
 
 const allPosts = await getCollection('blog');
-function getPostsForLocale(loc: 'es' | 'en'): BlogPost[] {
-  const collectionPosts: BlogPost[] = allPosts
-  .filter((post) => post.data.lang === loc)
-  .map((post) => ({
-    id: post.id,
-    title: post.data.title,
-    date: post.data.date,
-    excerpt: post.data.excerpt || post.body.slice(0, 150) + '...',
-    slug: post.id,
-    lang: post.data.lang,
-    isStatic: false,
-  }));
-
-  const staticPosts = getStaticPosts().filter((post) => post.lang === loc);
-  return [...collectionPosts, ...staticPosts].sort(
-    (a, b) => b.date.valueOf() - a.date.valueOf()
-  );
+function getPostsForLocale(loc: 'es' | 'en') {
+  return allPosts
+    .filter((post) => post.data.lang === loc)
+    .map((post) => ({
+      id: post.id,
+      title: post.data.title,
+      date: post.data.date,
+      excerpt: post.data.excerpt || post.body.slice(0, 150) + '...',
+      slug: post.id,
+      lang: post.data.lang,
+    }))
+    .sort((a, b) => b.date.valueOf() - a.date.valueOf());
 }
 
 const postsByLocale = { es: getPostsForLocale('es'), en: getPostsForLocale('en') };
@@ -43,60 +38,47 @@ function formatDate(date: Date, loc: string): string {
 <Base title={`${t.blog.title} — Diego Betancourt`} description={t.meta.description}>
   <Navigation />
 
-  <main
-    style="padding-top: 3.5rem;"
-    id="blog-main"
-  >
-    <script is:inline>
-      function setBlogOffset() {
-        const main = document.getElementById('blog-main');
-        if (!main) return;
-        if (window.innerWidth >= 768) {
-          main.style.marginLeft = '15rem';
-          main.style.paddingTop = '0';
-        } else {
-          main.style.marginLeft = '0';
-          main.style.paddingTop = '3.5rem';
-        }
-      }
-      setBlogOffset();
-      window.addEventListener('resize', setBlogOffset);
-    </script>
-
-    <section
-      style="
-        padding: 4rem 2.5rem;
-        border-bottom: 1px solid var(--color-border);
-      "
-    >
-      <!-- Section header -->
-      <div style="margin-bottom: 3rem; max-width: 52rem;">
-        <p class="t-metadata" style="color: var(--color-text-muted); margin-bottom: 0.75rem;">07 // Blog</p>
-        <h1 class="t-h1" data-i18n="blog">{t.blog.title}</h1>
+  <main id="blog-main" class="relative z-10 max-w-[1000px] mx-auto w-full px-6 sm:px-8 py-12 md:py-20 flex-grow">
+    <!-- Header -->
+    <div class="flex items-baseline justify-between gap-6 mb-12 pb-5 border-b border-[var(--border)]">
+      <div>
+        <div class="font-mono text-[12px] text-[var(--text-dim)] tracking-[0.06em]">
+          <span class="text-[var(--accent)] mr-2">07</span>WRITINGS & NOTES
+        </div>
+        <h1 class="font-mono font-medium text-[clamp(28px,3.5vw,40px)] tracking-[-0.03em] text-[var(--text-bright)] mt-2 mb-0" data-i18n="blog">
+          {t.blog.title}
+        </h1>
       </div>
 
-      <!-- Blog post list — editorial rows, no grid -->
-      {(['es', 'en'] as const).map((loc) => (
-        <div data-language-content={loc} style="max-width: 52rem;">
-          {postsByLocale[loc].length > 0
-            ? postsByLocale[loc].map((post) => (
-                <BlogCard
-                  title={post.title}
-                  excerpt={post.excerpt}
-                  date={post.date}
-                  slug={post.slug}
-                  lang={loc}
-                  dateFormat={formatDate(post.date, loc)}
-                />
-              ))
-            : (
-              <p class="t-body-small" style="padding: 2rem 0;">
-                {t.blog.noArticles}
-              </p>
-            )
-          }
-        </div>
-      ))}
-    </section>
+      <div class="font-mono text-[12px] text-[var(--text-dim)] text-right hidden sm:block">
+        ~/blog<br />
+        <span class="text-[var(--accent)]">● published articles</span>
+      </div>
+    </div>
+
+    <!-- Blog post listing -->
+    {(['es', 'en'] as const).map((loc) => (
+      <div data-language-content={loc} class="flex flex-col gap-4">
+        {postsByLocale[loc].length > 0
+          ? postsByLocale[loc].map((post) => (
+              <BlogCard
+                title={post.title}
+                excerpt={post.excerpt}
+                date={post.date}
+                slug={post.slug}
+                lang={loc}
+                dateFormat={formatDate(post.date, loc)}
+              />
+            ))
+          : (
+            <p class="font-mono text-[14px] text-[var(--text-dim)] py-8 text-center border border-dashed border-[var(--border)] rounded-xl">
+              {t.blog.noArticles}
+            </p>
+          )
+        }
+      </div>
+    ))}
   </main>
+
+  <Footer />
 </Base>

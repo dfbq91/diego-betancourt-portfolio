@@ -3,7 +3,8 @@
     "about": "Acerca de Mí",
     "experience": "Experiencia",
     "projects": "Proyectos",
-    "cv": "Hoja de Vida",
+    "mindset": "Mentalidad",
+    "cv": "CV",
     "contact": "Contacto",
     "blog": "Blog"
   },
@@ -20,6 +21,10 @@
     "demo": "Demo",
     "repo": "Repositorio"
   },
+  "mindset": {
+    "title": "Mi Mentalidad",
+    "eyebrow": "PRINCIPIOS"
+  },
   "chat": {
     "title": "Chatea con Diego",
     "eyebrow": "Conversación directa",
@@ -32,14 +37,25 @@
     "error": "No se pudo obtener una respuesta. Inténtalo de nuevo.",
     "limit": "Alcanzaste el límite de preguntas para esta sesión."
   },
-  "cv": {
-    "title": "Hoja de Vida",
+  "Resume": {
+    "title": "CV",
     "download": "Descargar CV"
   },
   "contact": {
     "title": "Contacto",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "github": "GitHub",
+    "email": "Email",
+    "emailCard": "Enviar email",
+    "emailSubject": "Asunto",
+    "emailMessage": "Mensaje",
+    "emailSend": "Enviar",
+    "emailSending": "Enviando…",
+    "emailSuccess": "¡Mensaje enviado! Te responderé pronto.",
+    "emailError": "No se pudo enviar el mensaje. Inténtalo de nuevo.",
+    "emailClose": "Cerrar",
+    "emailSubjectPlaceholder": "¿Sobre qué quieres hablar?",
+    "emailMessagePlaceholder": "Escribe tu mensaje…"
   },
   "blog": {
     "title": "Blog",

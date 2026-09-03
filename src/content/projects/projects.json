@@ -1,23 +1,16 @@
 [
   {
-    "name": "TaskMaster Pro",
-    "description": "Aplicación de gestión de tareas en tiempo real con colaboración en equipo, notificaciones push y sincronización offline.",
-    "technologies": ["React", "Node.js", "PostgreSQL", "WebSocket"],
-    "demoUrl": "https://taskmaster-demo.vercel.app",
-    "repoUrl": "https://github.com/diegobetancourt/taskmaster"
-  },
-  {
-    "name": "WeatherDash",
-    "description": "Dashboard meteorológico con visualizaciones interactivas, alertas personalizadas y datos históricos de más de 10 años.",
-    "technologies": ["Vue.js", "D3.js", "Python", "FastAPI"],
-    "demoUrl": null,
-    "repoUrl": "https://github.com/diegobetancourt/weatherdash"
-  },
-  {
-    "name": "DevPortfolio",
-    "description": "Generador de portafolios para desarrolladores con múltiples templates, integración con GitHub y hosting estático.",
-    "technologies": ["Astro", "TypeScript", "Tailwind CSS"],
-    "demoUrl": "https://devportfolio.dev",
+    "name": "Ingenioempresa.com",
+    "description": "Plataforma de contenido independiente (blog + YouTube) sobre mejora de procesos y gestión empresarial. Crecida de 0 a 20.000 visitas diarias orgánicas mediante estrategia de contenido, SEO, análisis de datos (Google Tag Manager, Google Analytics) y redacción técnica. Activa desde 2017.",
+    "technologies": ["SEO", "Google Analytics", "Google Tag Manager", "WordPress", "YouTube"],
+    "demoUrl": "https://ingenioempresa.com",
     "repoUrl": null
+  },
+  {
+    "name": "Diego Betancourt Portfolio",
+    "description": "Portfolio personal construido con Astro y Tailwind CSS, aplicando spec-driven development con tests end-to-end (Playwright) y despliegue en Cloudflare. Incluye chat con RAG (Retrieval-Augmented Generation) usando Workers AI.",
+    "technologies": ["Astro", "TypeScript", "Cloudflare Workers AI", "RAG"],
+    "demoUrl": null,
+    "repoUrl": "https://github.com/dfbq91/diego-betancourt-portfolio"
   }
 ]

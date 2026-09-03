@@ -1,0 +1,30 @@
+{
+  "intro": "Cinco principios que guían cómo pienso, tomo decisiones y trabajo con otros.",
+  "points": [
+    {
+      "id": "curiosity",
+      "title": "La curiosidad lo es todo",
+      "body": "El deseo de aprender es lo que más valoro en un profesional de tecnología. Es un deleite escuchar a alguien que habla con pasión genuina por aprender."
+    },
+    {
+      "id": "humility",
+      "title": "Humildad intelectual",
+      "body": "Es algo que no debemos perder: ser conscientes de lo poco que sabemos y de lo mucho que nos falta por aprender es lo que nos mantiene en movimiento. Decir 'no sé' no está mal; es el punto de partida de todo aprendizaje."
+    },
+    {
+      "id": "strategy",
+      "title": "El desorden nace arriba",
+      "body": "El desorden de la estrategia de la alta dirección se refleja en toda la organización. Basta ver cómo la falta de un norte claro en los líderes termina convirtiéndose en ruido, caos y desconexión en cada equipo."
+    },
+    {
+      "id": "questions",
+      "title": "Primero las preguntas, luego la solución",
+      "body": "Nada se resuelve bien sin antes entender bien el problema. Antes de proponer una solución, me tomo el tiempo de hacer preguntas y comprender el contexto real."
+    },
+    {
+      "id": "no",
+      "title": "Aprende a decir NO",
+      "body": "Es más fácil responder 'espera, lo reviso': reduzco la incertidumbre, te doy un tiempo estimado y, si no se puede, te lo diré con un no claro. Decir no a tiempo protege tu foco y el del equipo."
+    }
+  ]
+}

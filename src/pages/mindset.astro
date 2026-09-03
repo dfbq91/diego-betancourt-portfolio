@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Navigation from '../components/Navigation.astro';
+import MindsetSection from '../components/MindsetSection.astro';
+import Footer from '../components/Footer.astro';
+import { getLocale, getTranslations } from '../i18n/i18n';
+import mindsetEs from '../content/mindset/mindset.json';
+import mindsetEn from '../content/mindset/mindset.en.json';
+
+const t = getTranslations(Astro.url);
+const locale = getLocale(Astro.url);
+const mindset = locale === 'en' ? mindsetEn : mindsetEs;
+const count = String(mindset.points.length).padStart(2, '0');
+---
+
+<Base title={`${t.mindset.title} — Diego Betancourt`} description={t.meta.description}>
+  <Navigation />
+
+  <main id="mindset-main" class="relative z-10 max-w-[1000px] mx-auto w-full px-6 sm:px-8 py-12 md:py-20 flex-grow">
+    <!-- Header -->
+    <div class="flex items-baseline justify-between gap-6 mb-12 pb-5 border-b border-[var(--border)]">
+      <div>
+        <div class="font-mono text-[12px] text-[var(--text-dim)] tracking-[0.06em]">
+          <span class="text-[var(--accent)] mr-2">06</span>{t.mindset.eyebrow}
+        </div>
+        <h1 class="font-mono font-medium text-[clamp(28px,3.5vw,40px)] tracking-[-0.03em] text-[var(--text-bright)] mt-2 mb-0">
+          {t.mindset.title}
+        </h1>
+        <p class="font-mono text-[13px] text-[var(--text-dim)] m-0 mt-2 max-w-[62ch]">
+          {mindset.intro}
+        </p>
+      </div>
+
+      <div class="font-mono text-[12px] text-[var(--text-dim)] text-right hidden sm:block">
+        ~/mindset<br />
+        <span class="text-[var(--text-faint)]">{count} principles</span>
+      </div>
+    </div>
+
+    <MindsetSection />
+  </main>
+
+  <Footer />
+</Base>

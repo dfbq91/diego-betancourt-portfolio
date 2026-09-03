@@ -1,0 +1,42 @@
+---
+import { getLocale } from '../i18n/i18n';
+import mindsetEs from '../content/mindset/mindset.json';
+import mindsetEn from '../content/mindset/mindset.en.json';
+
+const locale = getLocale(Astro.url);
+const mindset = locale === 'en' ? mindsetEn : mindsetEs;
+const points = mindset.points;
+---
+
+<!-- ============================================================
+     Principle cards grid (used on the standalone /mindset page)
+     ============================================================ -->
+<section
+  id="mindset"
+  class="flex flex-col gap-4"
+  aria-labelledby="mindset-heading"
+>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {points.map((point, index) => {
+      const indexStr = String(index + 1).padStart(2, '0');
+      return (
+        <article
+          class="tech-card flex flex-col p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] transition-all duration-200 hover:border-[var(--accent)] hover:-translate-y-0.5"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-[11px] text-[var(--accent)] tracking-[0.08em]">
+              [{indexStr}]
+            </span>
+            <span class="font-mono text-[11px] text-[var(--text-faint)]">~/principle</span>
+          </div>
+          <h2 class="font-mono text-[16px] sm:text-[17px] font-medium text-[var(--text-bright)] tracking-tight mb-2">
+            {point.title}
+          </h2>
+          <p class="text-[14px] leading-[1.65] text-[var(--text)] m-0 text-pretty">
+            {point.body}
+          </p>
+        </article>
+      );
+    })}
+  </div>
+</section>

@@ -24,3 +24,9 @@ RAG_SESSION_QUESTION_LIMIT = "10"
 RAG_TOP_K = "3"
 WORKERS_AI_EMBEDDING_MODEL = "@cf/baai/bge-m3"
 WORKERS_AI_GENERATION_MODEL = "@cf/zai-org/glm-4.7-flash"
+
+# Contact email delivery (/api/email/send) — the Resend API key is a SECRET set via:
+#   npx wrangler secret put CONTACT_EMAIL_API_KEY --name diego-betancourt-portfolio
+CONTACT_EMAIL_TO = "dfbq91@gmail.com"
+# "From" must use a domain verified in the Resend account (defaults to onboarding@resend.dev).
+CONTACT_EMAIL_FROM = "Contact <onboarding@resend.dev>"

@@ -8,29 +8,53 @@ const { title, description = 'Software Engineer Portfolio — Diego Betancourt' 
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#09090b" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-  </head>
-  <body>
-    <slot />
+    <!-- Prevent theme flicker before paint -->
     <script is:inline>
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.documentElement.dataset.theme = savedTheme;
+    </script>
+  </head>
+  <body class="relative min-h-screen text-[var(--text)] bg-[var(--bg)] font-sans antialiased">
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-base" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-torch" id="bg-torch" aria-hidden="true"></div>
+    <div class="bg-layer bg-vignette" aria-hidden="true"></div>
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+      <slot />
+    </div>
+
+    <!-- Interactive scripts: Mouse flashlight & i18n & theme switcher -->
+    <script is:inline>
+      // Mouse Torch effect for highlighted dot matrix
+      window.addEventListener('pointermove', (e) => {
+        document.documentElement.style.setProperty('--mx', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--my', `${e.clientY}px`);
+      }, { passive: true });
+
+      // Language handling & query param sync
       const locale = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'es';
       const labels = {
-        es: { about: 'Acerca de Mí', experience: 'Experiencia', projects: 'Proyectos', chat: 'Chatea con Diego', cv: 'Hoja de Vida', contact: 'Contacto', blog: 'Blog', backToBlog: 'Volver al Blog' },
-        en: { about: 'About Me', experience: 'Experience', projects: 'Projects', chat: 'Chat with Diego', cv: 'Resume', contact: 'Contact', blog: 'Blog', backToBlog: 'Back to Blog' },
+        es: { about: 'Acerca de Mí', experience: 'Experiencia', projects: 'Proyectos', mindset: 'Mentalidad', chat: 'Chatea con Diego', cv: 'CV', contact: 'Contacto', blog: 'Blog', backToBlog: 'Volver al Blog' },
+        en: { about: 'About Me', experience: 'Experience', projects: 'Projects', mindset: 'Mindset', chat: 'Chat with Diego', cv: 'Resume', contact: 'Contact', blog: 'Blog', backToBlog: 'Back to Blog' },
       };
 
       document.documentElement.lang = locale;
       document.documentElement.dataset.locale = locale;
       document.querySelectorAll('[data-i18n]').forEach((element) => {
         const key = element.getAttribute('data-i18n');
-        if (key && labels[locale][key]) element.textContent = labels[locale][key];
+        if (key && labels[locale] && labels[locale][key]) {
+          element.textContent = labels[locale][key];
+        }
       });
       document.querySelectorAll('a[href*="lang="]:not([data-locale-link])').forEach((link) => {
         const href = link.getAttribute('href');

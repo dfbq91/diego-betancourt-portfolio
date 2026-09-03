@@ -12,44 +12,29 @@ const { title, excerpt, date, slug, lang, dateFormat } = Astro.props;
 const articleUrl = `/blog/${slug}?lang=${lang}`;
 ---
 
-<!-- Editorial blog entry row — no card frame -->
-<article
-  style="
-    border-bottom: 1px solid var(--color-border);
-    padding: 1.75rem 0;
-  "
->
+<article class="tech-card p-5 sm:p-6 mb-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] transition-all duration-200 hover:border-[var(--accent)] hover:-translate-y-0.5">
   <a
     href={articleUrl}
-    style="text-decoration: none; display: block;"
+    class="block text-inherit no-underline group"
     aria-label={title}
   >
-    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-      <time
-        class="t-metadata"
-        style="color: var(--color-text-muted);"
-        datetime={date.toISOString()}
-      >
-        {dateFormat}
-      </time>
-      <h3
-        class="t-h2"
-        style="
-          transition: color 150ms ease-out;
-          color: var(--color-text-primary);
-        "
-      >
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center justify-between font-mono text-[11.5px] text-[var(--text-dim)]">
+        <time datetime={date.toISOString()}>
+          {dateFormat}
+        </time>
+        <span class="text-[var(--accent)] font-mono opacity-0 group-hover:opacity-100 transition-opacity">
+          read article →
+        </span>
+      </div>
+
+      <h3 class="font-mono text-[18px] sm:text-[20px] font-medium text-[var(--text-bright)] group-hover:text-[var(--accent)] transition-colors duration-150">
         {title}
       </h3>
-      <p class="t-body-small" style="max-width: 52rem;">
+
+      <p class="text-[14px] text-[var(--text-dim)] leading-relaxed m-0 text-pretty">
         {excerpt}
       </p>
     </div>
   </a>
 </article>
-
-<style>
-  article a:hover h3 {
-    color: var(--color-text-secondary);
-  }
-</style>

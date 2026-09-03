@@ -3,6 +3,7 @@
     "about": "About Me",
     "experience": "Experience",
     "projects": "Projects",
+    "mindset": "Mindset",
     "cv": "Resume",
     "contact": "Contact",
     "blog": "Blog"
@@ -20,6 +21,10 @@
     "demo": "Demo",
     "repo": "Repository"
   },
+  "mindset": {
+    "title": "My Mindset",
+    "eyebrow": "PRINCIPLES"
+  },
   "chat": {
     "title": "Chat with Diego",
     "eyebrow": "A direct conversation",
@@ -32,14 +37,25 @@
     "error": "We couldn’t get a response. Please try again.",
     "limit": "You’ve reached the question limit for this session."
   },
-  "cv": {
+  "Resume": {
     "title": "Resume",
     "download": "Download Resume"
   },
   "contact": {
     "title": "Contact",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "github": "GitHub",
+    "email": "Email",
+    "emailCard": "Send an email",
+    "emailSubject": "Subject",
+    "emailMessage": "Message",
+    "emailSend": "Send",
+    "emailSending": "Sending…",
+    "emailSuccess": "Message sent! I'll get back to you soon.",
+    "emailError": "We couldn't send your message. Please try again.",
+    "emailClose": "Close",
+    "emailSubjectPlaceholder": "What would you like to talk about?",
+    "emailMessagePlaceholder": "Write your message…"
   },
   "blog": {
     "title": "Blog",

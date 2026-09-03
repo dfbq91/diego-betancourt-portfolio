@@ -1,0 +1,30 @@
+{
+  "intro": "Five principles that guide how I think, make decisions, and work with others.",
+  "points": [
+    {
+      "id": "curiosity",
+      "title": "Curiosity is everything",
+      "body": "The desire to learn is what I value most in a tech professional. It's a delight to hear someone speak with genuine passion for learning."
+    },
+    {
+      "id": "humility",
+      "title": "Intellectual humility",
+      "body": "It's something we must never lose: being aware of how little we know and how much we still have to learn is what keeps us moving. Saying 'I don't know' isn't wrong — it's the starting point of all learning."
+    },
+    {
+      "id": "strategy",
+      "title": "Chaos starts at the top",
+      "body": "Strategy chaos at the leadership level cascades through the entire organization. Just look at how a lack of clear direction in leaders turns into noise, confusion, and disconnection in every team."
+    },
+    {
+      "id": "questions",
+      "title": "Questions first, solutions second",
+      "body": "Nothing is solved well without first understanding the problem deeply. Before proposing a solution, I take the time to ask questions and understand the real context."
+    },
+    {
+      "id": "no",
+      "title": "Learn to say NO",
+      "body": "It's easier to say 'wait, let me look into it': I reduce the uncertainty, give you an estimated timeline, and if it's not possible, I'll give you a clear no. Saying no in time protects your focus and the team's."
+    }
+  ]
+}

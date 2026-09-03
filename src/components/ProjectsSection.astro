@@ -2,6 +2,7 @@
 import { getLocale } from '../i18n/i18n';
 import projectsEs from '../content/projects/projects.json';
 import projectsEn from '../content/projects/projects.en.json';
+import config from '../data/config.json';
 
 interface Project {
   name: string;
@@ -23,134 +24,118 @@ const projects: Project[] = locale === 'en' ? projectsEn : projectsEs;
 ---
 
 <!-- ============================================================
-     PROJECTS — T-10: Technical Case Studies
-     Open rows structured as: Title → Description → Tech stack
-     No card grids, no badge clouds
+     3-column responsive tech cards, index tags, radial glow, live links
      ============================================================ -->
 <section
   id="projects"
-  class="scroll-mt-14 md:scroll-mt-0"
-  style="
-    padding: 4rem 2.5rem;
-    border-bottom: 1px solid var(--color-border);
-  "
+  class="relative py-20 border-b border-[var(--border)] scroll-mt-20"
   aria-labelledby="projects-heading"
 >
-  <!-- Section header -->
-  <div style="margin-bottom: 3rem;">
-    <p class="t-metadata" style="color: var(--color-text-muted); margin-bottom: 0.75rem;">
-      {locale === 'en' ? '03 // Projects' : '03 // Proyectos'}
-    </p>
-    <h2
-      id="projects-heading"
-      class="t-h1"
-      data-i18n="projects"
-    >
-      {title}
-    </h2>
-  </div>
-
-  <!-- Case study rows -->
-  <div style="max-width: 52rem;">
-    {projects.map((project, index) => {
-      const isLast = index === projects.length - 1;
-      return (
-        <article
-          style={`
-            padding-bottom: 3rem;
-            ${!isLast ? 'margin-bottom: 3rem; border-bottom: 1px solid var(--color-border);' : ''}
-          `}
+  <div class="max-w-[1200px] mx-auto">
+    <!-- Section Header -->
+    <div class="flex items-baseline justify-between gap-6 mb-10 pb-5 border-b border-[var(--border)]">
+      <div>
+        <div class="font-mono text-[12px] text-[var(--text-dim)] tracking-[0.06em]">
+          <span class="text-[var(--accent)] mr-2">03</span>{locale === 'en' ? 'FEATURED WORK' : 'PROYECTOS DESTACADOS'}
+        </div>
+        <h2
+          id="projects-heading"
+          class="font-mono font-medium text-[clamp(26px,3.5vw,38px)] tracking-[-0.03em] text-[var(--text-bright)] mt-2 mb-0"
+          data-i18n="projects"
         >
-          <!-- Project title + links -->
-          <header style="margin-bottom: 1rem;">
-            <div
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                align-items: baseline;
-                gap: 0.5rem 1.5rem;
-                margin-bottom: 0.5rem;
-              "
-            >
-              <h3 class="t-h2">{project.name}</h3>
-              <div style="display: flex; gap: 1rem; align-items: center;">
-                {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="t-label"
-                    style="
-                      color: var(--color-text-muted);
-                      text-decoration: none;
-                      transition: color 150ms ease-out;
-                      display: inline-flex;
-                      align-items: center;
-                      gap: 0.25rem;
-                    "
-                    aria-label={`${project.name} — ${demoLabel}`}
-                  >
-                    {demoLabel} ↗
-                  </a>
-                )}
-                {project.repoUrl && (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="t-label"
-                    style="
-                      color: var(--color-text-muted);
-                      text-decoration: none;
-                      transition: color 150ms ease-out;
-                      display: inline-flex;
-                      align-items: center;
-                      gap: 0.25rem;
-                    "
-                    aria-label={`${project.name} — ${repoLabel}`}
-                  >
-                    {repoLabel} ↗
-                  </a>
-                )}
-              </div>
+          {title}
+        </h2>
+      </div>
+
+      <div class="font-mono text-[12px] text-[var(--text-dim)] text-right hidden sm:block">
+        ~/projects/featured<br />
+        <span class="text-[var(--text-faint)]">{projects.length} of {projects.length} visible</span>
+      </div>
+    </div>
+
+    <!-- 3-Column Card Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {projects.map((project, index) => {
+        const indexStr = String(index + 1).padStart(2, '0');
+
+        return (
+          <article class="tech-card flex flex-col min-h-[340px] border border-[var(--border)] rounded-xl bg-[var(--surface)] p-6 transition-all duration-200 hover:border-[var(--accent)] hover:-translate-y-1">
+            <!-- Card Index Badge -->
+            <div class="flex items-center justify-between font-mono text-[11px] mb-3">
+              <span class="text-[var(--accent)] tracking-[0.08em]">[{indexStr}]</span>
+              <span class="text-[var(--text-faint)]">// production</span>
             </div>
-          </header>
 
-          <!-- Description / context -->
-          <p class="t-body-small" style="margin-bottom: 1.5rem; max-width: 48rem;">
-            {project.description}
-          </p>
+            <!-- Project Title -->
+            <h3 class="font-mono text-[20px] font-medium text-[var(--text-bright)] tracking-tight mb-2.5">
+              {project.name}
+            </h3>
 
-          <!-- Tech stack — monospace inline metadata -->
-          {project.technologies.length > 0 && (
-            <div
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem 1rem;
-                align-items: center;
-              "
-            >
-              <span class="t-metadata" style="color: var(--color-text-muted); margin-right: 0.5rem;">
-                {locale === 'en' ? 'Stack' : 'Stack'}
-              </span>
-              {project.technologies.map((tech, i) => (
-                <span>
-                  <span
-                    class="t-metadata"
-                    style="color: var(--color-text-secondary);"
-                  >
+            <!-- Description -->
+            <p class="text-[14px] text-[var(--text)] leading-[1.6] mb-6 text-pretty flex-grow">
+              {project.description}
+            </p>
+
+            <!-- Tech Stack Pills -->
+            {project.technologies.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 mb-5">
+                {project.technologies.map((tech) => (
+                  <span class="font-mono text-[11px] px-2 py-0.5 rounded border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-dim)]">
                     {tech}
                   </span>
-                  {i < project.technologies.length - 1 && (
-                    <span class="t-metadata" style="color: var(--color-text-muted); margin-left: 0.5rem;">·</span>
-                  )}
-                </span>
-              ))}
+                ))}
+              </div>
+            )}
+
+            <!-- Footer Links -->
+            <div class="flex items-center gap-4 pt-3.5 border-t border-dashed border-[var(--border)] mt-auto font-mono text-[12px]">
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors duration-150 no-underline"
+                  aria-label={`${project.name} — ${demoLabel}`}
+                >
+                  <span class="text-[var(--accent)]">↗</span>
+                  <span>{demoLabel}</span>
+                </a>
+              )}
+
+              {project.repoUrl && (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors duration-150 no-underline"
+                  aria-label={`${project.name} — ${repoLabel}`}
+                >
+                  <span class="text-[var(--accent)]">↗</span>
+                  <span>{repoLabel}</span>
+                </a>
+              )}
             </div>
-          )}
-        </article>
-      );
-    })}
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- Terminal Footer: $ ls -al /projects -->
+    <div class="mt-10 pt-6 border-t border-dashed border-[var(--border)] flex items-center justify-between flex-wrap gap-4">
+      <span class="font-mono text-[13px] text-[var(--text-dim)]">
+        <span class="text-[var(--text-faint)] select-none">$ </span>ls -al /projects
+        <span class="text-[var(--text-faint)] ml-2 text-[11.5px]">// {locale === 'en' ? 'more code on github' : 'más código en github'}</span>
+      </span>
+
+      <a
+        href={config.social.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-secondary text-[12px]"
+      >
+        <span class="text-[var(--text-faint)]">$</span>
+        <span>{locale === 'en' ? 'view all on github' : 'ver todo en github'}</span>
+      </a>
+    </div>
   </div>
 </section>

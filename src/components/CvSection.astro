@@ -12,60 +12,69 @@ const locale = getLocale(Astro.url);
 ---
 
 <!-- ============================================================
-     CV SECTION — T-13: Centralized config path, clean text trigger
+     Terminal document preview card and glowing download button
      ============================================================ -->
 <section
   id="cv"
-  class="scroll-mt-14 md:scroll-mt-0"
-  style="
-    padding: 4rem 2.5rem;
-    border-bottom: 1px solid var(--color-border);
-  "
+  class="relative py-20 border-b border-[var(--border)] scroll-mt-20"
   aria-labelledby="cv-heading"
 >
-  <div style="max-width: 52rem;">
-    <!-- Section header -->
-    <div style="margin-bottom: 2.5rem;">
-      <p class="t-metadata" style="color: var(--color-text-muted); margin-bottom: 0.75rem;">
-        {locale === 'en' ? '05 // Resume' : '05 // Hoja de Vida'}
-      </p>
-      <h2
-        id="cv-heading"
-        class="t-h1"
-        data-i18n="cv"
-      >
-        {title}
-      </h2>
+  <div class="max-w-[1200px] mx-auto">
+    <!-- Section Header -->
+    <div class="flex items-baseline justify-between gap-6 mb-10 pb-5 border-b border-[var(--border)]">
+      <div>
+        <div class="font-mono text-[12px] text-[var(--text-dim)] tracking-[0.06em]">
+          <span class="text-[var(--accent)] mr-2">05</span>{locale === 'en' ? 'CURRICULUM VITAE' : 'DOCUMENTACIÓN'}
+        </div>
+        <h2
+          id="cv-heading"
+          class="font-mono font-medium text-[clamp(26px,3.5vw,38px)] tracking-[-0.03em] text-[var(--text-bright)] mt-2 mb-0"
+          data-i18n="cv"
+        >
+          {title}
+        </h2>
+      </div>
+
+      <div class="font-mono text-[12px] text-[var(--text-dim)] text-right hidden sm:block">
+        ~/cv/diego-betancourt.pdf<br />
+        <span class="text-[var(--accent)]">● PDF format</span>
+      </div>
     </div>
 
-    <!-- CV download trigger -->
-    <a
-      href={config.cv.file}
-      download
-      id="cv-download"
-      style="
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-        border: 1px solid var(--color-border);
-        padding: 0.875rem 1.5rem;
-        color: var(--color-text-secondary);
-        transition: color 150ms ease-out, border-color 150ms ease-out;
-      "
-      aria-label={`${downloadLabel} — PDF`}
-    >
-      <span class="t-label">
-        {downloadLabel}
-      </span>
-      <span class="t-metadata" style="color: var(--color-text-muted);">↓ PDF</span>
-    </a>
+    <!-- Terminal Preview Card -->
+    <div class="tech-card p-6 sm:p-8 max-w-[800px] flex flex-col gap-6">
+      <div class="flex items-center justify-between font-mono text-[12px] border-b border-dashed border-[var(--border)] pb-3 text-[var(--text-dim)]">
+        <span class="flex items-center gap-2">
+          <span class="text-[var(--text-faint)] select-none">$ </span>
+          <span>cat diego-betancourt-cv.pdf</span>
+        </span>
+        <span class="text-[var(--text-faint)]">~240 KB</span>
+      </div>
+
+      <div class="font-mono text-[13px] text-[var(--text)] flex flex-col gap-2 leading-relaxed">
+        <p class="text-[var(--text-bright)] font-medium">
+          Diego Betancourt — Senior Software Engineer
+        </p>
+        <p class="text-[var(--text-dim)]">
+          {locale === 'en'
+            ? '6+ years building performant cloud platforms, distributed systems, and modern AI integrations.'
+            : '6+ años construyendo plataformas cloud escalables, sistemas distribuidos e integraciones de IA modernas.'}
+        </p>
+      </div>
+
+      <div class="pt-2">
+        <a
+          href={config.cv.file}
+          target="_blank"
+          rel="noopener noreferrer"
+          id="cv-download"
+          class="btn-accent inline-flex items-center gap-2"
+          aria-label={`${downloadLabel} — PDF`}
+        >
+          <span>↓</span>
+          <span>{downloadLabel} (PDF)</span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
-
-<style>
-  #cv-download:hover {
-    color: var(--color-text-primary);
-    border-color: var(--color-text-muted);
-  }
-</style>

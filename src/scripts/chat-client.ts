@@ -28,8 +28,8 @@ function addMessage(messages: HTMLElement, text: string, role: 'user' | 'assista
   message.dataset.chatMessage = role;
   message.className =
     role === 'user'
-      ? 'ml-auto max-w-[90%] rounded-2xl rounded-tr-sm bg-slate-900 px-4 py-3 text-sm leading-6 text-white'
-      : 'max-w-[90%] rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm leading-6 text-slate-700 shadow-sm ring-1 ring-slate-200';
+      ? 'ml-auto max-w-[85%] rounded-lg border border-[var(--border-strong)] bg-[var(--surface-2)] px-3.5 py-2 font-mono text-[13px] text-[var(--text-bright)] whitespace-pre-wrap'
+      : 'max-w-[92%] rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2.5 font-mono text-[13px] text-[var(--text)] whitespace-pre-wrap leading-relaxed';
   message.textContent = text;
   messages.append(message);
   message.scrollIntoView({ block: 'nearest', behavior: 'smooth' });

@@ -1,0 +1,41 @@
+---
+import config from '../data/config.json';
+import { getLocale } from '../i18n/i18n';
+
+const locale = getLocale(Astro.url);
+const currentYear = new Date().getFullYear();
+---
+
+<!-- ============================================================
+     Monospace copyright, homelab/edge deployment tag, and links
+     ============================================================ -->
+<footer class="relative z-10 max-w-[1200px] mx-auto w-full px-6 sm:px-8 border-t border-[var(--border)] pt-8 pb-14 font-mono text-[12px] text-[var(--text-dim)] flex flex-col sm:flex-row justify-between items-center gap-4">
+  <div>
+    <span>© {currentYear} Diego Betancourt</span>
+  </div>
+
+  <div class="flex items-center gap-5">
+    <a
+      href={config.social.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors no-underline"
+    >
+      github
+    </a>
+    <a
+      href={config.social.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors no-underline"
+    >
+      linkedin
+    </a>
+    <a
+      href={`/blog?lang=${locale}`}
+      class="text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors no-underline"
+    >
+      blog
+    </a>
+  </div>
+</footer>

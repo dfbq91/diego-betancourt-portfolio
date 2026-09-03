@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.6",
+    "@astrojs/markdown-remark": "^7.2.4",
     "@fontsource/geist": "^5.3.0",
     "@fontsource/geist-mono": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",

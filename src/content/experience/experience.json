@@ -1,23 +1,9 @@
 [
   {
-    "company": "Tech Solutions SAS",
+    "company": "Banco de Bogotá",
     "position": "Senior Software Engineer",
-    "startDate": "2022-03",
+    "startDate": "2021-11",
     "endDate": null,
-    "description": "- Lideré el desarrollo de una plataforma de comercio electrónico que aumentó las ventas en un 40%\n- Implementé arquitectura de microservicios reduciendo tiempos de carga en un 60%\n- Mentoré a 3 desarrolladores junior, mejorando la calidad del código del equipo"
-  },
-  {
-    "company": "Digital Innovation Labs",
-    "position": "Full Stack Developer",
-    "startDate": "2020-01",
-    "endDate": "2022-02",
-    "description": "- Desarrollé aplicaciones web responsivas usando React y Node.js\n- Optimicé consultas de base de datos reduciendo tiempos de respuesta en un 75%\n- Implementé pipeline de CI/CD reduciendo tiempo de despliegue de horas a minutos"
-  },
-  {
-    "company": "StartupHub",
-    "position": "Junior Developer",
-    "startDate": "2019-06",
-    "endDate": "2019-12",
-    "description": "- Participé en el desarrollo de MVP para múltiples startups\n- Creé APIs RESTful documentadas con Swagger\n- Colaboré en equipos ágiles siguiendo metodologías Scrum"
+    "description": "- Lideré la arquitectura y entrega de una plataforma de identidad digital multi-factor que sirve a millones de usuarios bancarios; gestioné un equipo multifuncional de 9 personas.\n- Diseñé y desplegué un sistema de onboarding biométrico con reconocimiento facial (MediaPipe, TensorFlow) que alcanzó una tasa de conversión del 53% en el lanzamiento.\n- Arquitecté una capa de orquestación serverless basada en eventos (EventBridge, SQS FIFO, Lambda, DynamoDB) para flujos de autenticación de alta concurrencia con garantías de baja latencia.\n- Construí una capa de detección de fraude en tiempo real que redujo el tiempo de revisión en un 60%."
   }
 ]
