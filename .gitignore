@@ -27,6 +27,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Wrangler/Miniflare local runtime state
+.wrangler/state/
+
 # macOS-specific files
 .DS_Store
 

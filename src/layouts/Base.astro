@@ -8,7 +8,7 @@ const { title, description = 'Software Engineer Portfolio — Diego Betancourt' 
 ---
 
 <!doctype html>
-<html lang="es" data-theme="dark">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,7 +42,7 @@ const { title, description = 'Software Engineer Portfolio — Diego Betancourt' 
       }, { passive: true });
 
       // Language handling & query param sync
-      const locale = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'es';
+      const locale = new URLSearchParams(window.location.search).get('lang') === 'es' ? 'es' : 'en';
       const labels = {
         es: { about: 'Acerca de Mí', experience: 'Experiencia', projects: 'Proyectos', mindset: 'Mentalidad', chat: 'Chatea con Diego', cv: 'CV', contact: 'Contacto', blog: 'Blog', backToBlog: 'Volver al Blog' },
         en: { about: 'About Me', experience: 'Experience', projects: 'Projects', mindset: 'Mindset', chat: 'Chat with Diego', cv: 'Resume', contact: 'Contact', blog: 'Blog', backToBlog: 'Back to Blog' },

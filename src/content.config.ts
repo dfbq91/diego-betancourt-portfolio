@@ -7,7 +7,7 @@ const blogCollection = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     excerpt: z.string().optional(),
-    lang: z.enum(['es', 'en']).default('es'),
+    lang: z.enum(['es', 'en']).default('en'),
     author: z.string().default('Diego Betancourt'),
   }),
 });

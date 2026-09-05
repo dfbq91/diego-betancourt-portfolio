@@ -11,7 +11,7 @@ type ChatElements = {
 };
 
 function getLanguage(): 'es' | 'en' {
-  return document.documentElement.dataset.locale === 'en' ? 'en' : 'es';
+  return document.documentElement.dataset.locale === 'es' ? 'es' : 'en';
 }
 
 function getSessionId(): string {
